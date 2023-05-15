@@ -1,0 +1,24 @@
+```{python}
+#| include: false
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+```
+
+
+```{python}
+#| include: false
+url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv"
+penguins = pd.read_csv(url)
+```
+
+
+```{python}
+ax = sns.boxplot(data=penguins, x='species', y="body_mass_g")
+ax.set(xlabel='', ylabel='')
+ax.set_xticks([]) # <--- set the ticks first
+ax.set_xticklabels([])
+ax.set_yticks([]) # <--- set the ticks first
+ax.set_yticklabels([])
+plt.savefig("saved.png")
+```

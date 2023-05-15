@@ -1,0 +1,17 @@
+# Introducción {#sec-intro .unnumbered}
+
+
+En esta práctica aprenderás las técnicas básicas para explorar y visualizar un conjunto de datos con Python. 
+
+## Los pingüinos del archipiélago Palmer
+
+Presentaremos las diferentes técnicas a través de ejemplos trabajando con un conjunto de datos relativos a diferentes características de tres especies de pingüinos del archipiélago Palmer en la Antártida. 
+
+![Ilustración de las tres especies de pingüinos del archipiélago Palmer (Artista \@allison_horst)](../img/penguins.png){width="80%"}
+
+
+Los datos fueron originalmente publicados en @Gorman2014. Este conjunto de datos se hizo popular a partir de la creación del paquete  [palmerpenguins](https://github.com/allisonhorst/palmerpenguins) de [R](https://www.r-project.org/). Hoy en día los datos de los pingüinos del archipiélago Palmer se usan de forma extendida para ilustrar las técnicas de exploración y visualización de datos no solo en R, sino en muchos otros lenguajes de programación para estadística y ciencia de datos, como Python. Nosotros accederemos a los datos a través de [este enlace](https://github.com/mwaskom/seaborn-data/blob/master/penguins.csv), que proporciona los datos en formato CSV (_comma separated values_).
+
+## Objetivos
+
+Aprenderás en concreto a calcular las medidas descriptivas más representativas de las características de interés y a crear diferentes tipos de gráficos o visualizaciones. 

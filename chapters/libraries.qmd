@@ -1,0 +1,52 @@
+---
+editor:
+    render-on-save: true
+---
+
+```{python}
+#| echo: false
+import pandas as pd
+import seaborn as sns
+url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv"
+penguins = pd.read_csv(url)
+```
+
+# Librerías
+
+Lo primero que necesitamos hacer es importar las librerías de Python que usaremos a lo largo de práctica, que son `pandas` y `seaborn`:
+
+```{python}
+#| eval: false
+import pandas as pd
+import seaborn as sns
+```
+
+## `pandas`
+
+![](../img/pandas){height="4em" fig-align="center"}
+
+`pandas` es una librería que permite leer datos almacenados en estructuras similares a una tabla, como las hojas de cálculo o los archivos CSV, y proporciona métodos para explorar y describir esos datos. 
+
+Usando esta librería podremos calcular por ejemplo el peso medio de los pingüinos de cada especie. Obtendremos esta tabla:
+```{python}
+#| echo: false
+penguins.groupby("species")["body_mass_g"].mean()
+```
+
+Puedes consultar la documentación oficial de `pandas` [aquí](https://pandas.pydata.org/docs/index.html). <!-- Es especialmente útil su [cheatsheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf).-->
+
+## `seaborn`
+
+![](../img/seaborn){height="3em" fig-align="center"}
+
+`seaborn` es una librería para visualización de datos. Permite crear gráficos estadísticos visualmente atractivos con pocas líneas de código. Y está diseñado para trabajar con las estructuras de datos creadas con `pandas`.
+
+Usaremos `seaborn` para realizar diferentes tipos de gráficos como diagramas de barras, histogramas, diagramas de caja y bigotes etc. 
+
+Aprenderemos por ejemplo a crear el siguiente gráfico, con los diagramas de caja y bigotes para el peso de los pingüinos de cada especie.
+```{python}
+#| echo: false
+sns.boxplot(data=penguins, x='species', y="body_mass_g");
+```
+
+Puedes consultar la documentación oficial de `seaborn` [aquí](https://seaborn.pydata.org/index.html). <!-- También hay una [cheatsheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) creada por DataCamp.-->

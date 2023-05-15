@@ -1,0 +1,69 @@
+\usepackage{ehyperref}
+
+
+\AtBeginDocument{
+    \ifcsname c@theorem\endcsname % el contador theorem no está definido hasta que no se usa :::{#thm-label}
+        \counterwithout{theorem}{section}
+    \fi
+    % \counterwithout{exercise}{section}
+}
+
+\AtBeginDocument{
+
+    % Los entornos de teoremas que crea Quarto no están definidos hasta que no se usan.
+    % Por ejemplo, exercise no está definido hasta que no se usa :::{#exr-label}
+
+    % definition
+    \ifcsname enddefinition\endcsname 
+    \renewenvironment{definition}[1][]{
+        \if\relax\detokenize{#1}\relax
+            \dfn
+        \else
+            \dfn[note={#1}]
+        \fi
+    }{\enddfn}
+    \fi
+
+    % theorem
+    \ifcsname endtheorem\endcsname 
+    \renewenvironment{theorem}[1][]{%
+        \if\relax\detokenize{#1}\relax%
+            \thm%
+        \else%
+            \thm[note={#1}]%
+        \fi%
+        \unskip\unskip\ignorespaces
+    }{\endthm}
+    \fi   
+    
+    
+
+    % example
+    \ifcsname endexample\endcsname %
+        \renewenvironment{example}[1][]{
+            \if\relax\detokenize{#1}\relax
+                \exmp
+            \else
+                \exmp[note={#1}]
+            \fi
+        }{\endex}
+    \fi
+
+    % exercise
+    \ifcsname endexercise\endcsname %
+        \renewenvironment{exercise}[1][]{
+            \if\relax\detokenize{#1}\relax
+                \ex
+            \else
+                \ex[note={#1}]
+            \fi
+        }{\endex}
+    \fi
+
+    % solution
+    \ifcsname endsolution\endcsname 
+        \renewenvironment{solution}{
+                \sol
+        }{\endsol}
+    \fi
+}

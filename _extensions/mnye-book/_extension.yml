@@ -1,0 +1,112 @@
+title: MNyE Book
+author: Eva María Mazcuñán Navarro
+version: 0.1.0
+contributes:
+  project:
+    project:
+      type: book
+      output-dir: docs # relacionado: format.pdf.include-in-header
+      execute-dir: project
+      post-render:
+          - post-render/pdf/remove_preface_header.py
+          - post-render/pdf/remove_references_header.py
+          - post-render/pdf/insert_breaks_before_labels.py # después de remove_preface_header.py y remove_references_header.py
+          - post-render/pdf/remove_blank_lines_before_exercises.py
+          - post-render/pdf/remove_markboth.py
+          - post-render/pdf/crossrefs.py
+          - post-render/pdf/regenerate_output_pdf_file.py
+          - post-render/pdf/clean_tex_aux_files.py
+    book:
+      reader-mode: true
+      # downloads: [pdf] # Aquí no tiene efecto. Tiene que ir en _quarto.yml
+      repo-actions: [source]  
+      repo-branch: master
+      search:
+        location: navbar
+      sidebar:
+        footer: |
+          ***
+          {{< meta book.author >}}
+          
+          Hecho con [Quarto](https://quarto.org)
+        border: true
+    lang: es
+
+    toc: true
+
+    bibliography: references.bib
+    biblio-title: Bibliografía
+
+    callout-appearance: simple
+    
+    crossref: 
+      fig-prefix: "Figura" 
+      fig-title: "Figura"
+      tbl-prefix: "Tabla" 
+      tbl-title: "Tabla"
+      sec-prefix: "Sección"
+      sec-title: "Sección"
+      thm-prefix: "Teorema"
+      thm-title: "Teorema"
+      def-prefix: "Definición"
+      def-title: "Definición"
+      exr-prefix: "Ejercicio" 
+      exr-title: "Ejercicio"
+      exm-prefix: "Ejemplo"
+      exm-title: "Ejemplo"
+
+  format:
+    html:
+      theme: 
+        light: [flatly, html/theme/mnye.scss]
+        dark: [darkly, html/theme/mnye.scss]
+      filters:
+        - html/filters/solutions.lua
+      toc-title: En esta página
+      include-before-body: 
+        - html/progressbar.html  
+        - html/back-to-top.html
+      template-partials:
+        - html/partials/title-block.html
+      # crossref: 
+      #   exr-title: Problema
+      #   exr-prefix: Problema
+      link-external-newwindow: true
+      default-image-extension: svg
+    pdf:
+      documentclass: mnye
+      papersize: a4
+      classoption: 
+        - noprof
+        - 12pt
+        - notoc
+        - nosols
+        - nobib
+      template-partials:
+        - pdf/partials/title.tex
+        - pdf/partials/toc.tex  
+        - pdf/partials/before-bib.tex
+        - pdf/partials/biblio.tex
+      toc-title: Contenidos
+      toc-depth: 2
+      cite-method: biblatex
+      biblatexoptions: 
+        - backend=biber
+      include-in-header: 
+        - pdf/in-header/theorems.tex  
+        - pdf/in-header/graphicspath.tex
+        - pdf/in-header/code-overflow-wrap.tex
+      linkcolor: elinkcolor
+      toccolor: elinkcolor
+      citecolor: ecitecolor
+      urlcolor:  eurlcolor
+      pdf-engine: pdflatex
+      pdf-engine-opt: -shell-escape # -halt-on-error -file-line-error -interaction=nonstopmode
+      latex-max-runs: 2
+      keep-tex: true
+      # shift-heading-level-by: 1
+      top-level-division: section
+      fig-pos: "tbph"     
+      crossref: 
+        chapters: false
+      default-image-extension: png

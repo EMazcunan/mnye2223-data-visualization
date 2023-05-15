@@ -1,0 +1,10 @@
+{
+  "hash": "39496299ad49bc4a09ba83d9350e085d",
+  "result": {
+    "markdown": "---\neditor:\n    render-on-save: true\n---\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport pandas as pd\nimport numpy as np\n```\n:::\n\n\n# Librerías\n\n## `pandas`\n\n### sub\n\n![](../img/pandas){height=\"5em\" fig-align=\"center\"}\n\n::: {.content-visible when-format=\"html\"}\n![](../img/pandas.svg){height=\"5em\" fig-align=\"center\"}\n:::\n\n::: {.content-visible when-format=\"pdf\"}\n![](../img/pandas.png){height=\"5em\" fig-align=\"center\"}\n:::\n\n## `numpy`\n\n",
+    "supporting": [
+      "libraries_files\\figure-pdf"
+    ],
+    "filters": []
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "index.qmd": {
+    "index.html": "8ce97a1f",
+    "kk.html": "6e40c3ad",
+    "kk": "e56679a7"
+  },
+  "chapters/intro.qmd": {
+    "intro.html": "dc17c686"
+  },
+  "chapters/problems.qmd": {
+    "problems.html": "6413a6f4"
+  },
+  "chapters/references.qmd": {
+    "references.html": "2178352c"
+  },
+  "chapters/pandas.qmd": {
+    "pandas.html": "06b63cf0"
+  },
+  "chapters/bars.qmd": {
+    "bars.html": "2e4b192e"
+  },
+  "chapters/descriptive.qmd": {
+    "descriptive.html": "b43428ed"
+  },
+  "chapters/1numerical.qmd": {
+    "1numerical.html": "952b3f2b"
+  },
+  "chapters/1categorical.qmd": {
+    "1categorical.html": "8b39e8c3"
+  },
+  "chapters/numerical_by_categorical.qmd": {
+    "numerical_by_categorical.html": "0281c502"
+  },
+  "chapters/2categorical.qmd": {
+    "2categorical.html": "edec5b52"
+  },
+  "chapters/libraries.qmd": {
+    "libraries.html": "d4b542b8"
+  },
+  "chapters/data.qmd": {
+    "data.html": "da629467"
+  },
+  "chapters/groupby.qmd": {
+    "groupby.html": "65d5db45"
+  },
+  "chapters/test/test.qmd": {
+    "test.html": "0980366f"
+  },
+  "Quarto-Intro.qmd": {
+    "Quarto-Intro.html": "8a72a665"
+  },
+  "chapters/foo.qmd": {
+    "foo.html": "1867c012"
+  },
+  "chapters/subset.qmd": {
+    "subset.html": "8b1bf14e"
+  },
+  "chapters/subset-variables.qmd": {
+    "subset-variables.html": "c7ca441b"
+  },
+  "chapters/tbc.qmd": {
+    "tbc.html": "bce3a2e1"
+  }
+}

@@ -1,0 +1,145 @@
+---
+title: Seleccionar variables
+# editor:
+#     render-on-save: true
+---
+
+```{python}
+#| include: false
+import pandas as pd
+import seaborn as sns
+```
+
+```{python}
+#| include: false
+url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv"
+penguins = pd.read_csv(url)
+```
+
+Al estudiar un conjunto de datos, es frecuente tener que seleccionar los datos relevantes para responder a las diferentes cuestiones planteadas. 
+
+
+Si por ejemplo queremos saber cuál es el peso máximo de todos los pingüinos del estudio, seleccionaremos la variable `body_mass_g` y después calcularemos su máximo. 
+
+En esta sección aprenderás los métodos para seleccionar variables de una hoja de datos.
+
+
+## Seleccionar una variable
+
+Utiliza la siguiente instrucción para seleccionar la variable `body_mass_g`:
+```{python}
+mass = penguins["body_mass_g"]
+```
+
+::: {.callout-note}
+Para seleccionar una sola variable, usa corchetes `[]` e indica el nombre de la columna de interés.
+:::
+ 
+
+Ahora podemos aplicar la función `max()` para obtener el peso máximo:
+
+```{python}
+mass.max()
+```
+Vemos que el pingüino más pesado del estudio pesa $6$ kilos y $300$ gramos.
+
+
+<!-- ```{python}
+index = mass.argmax()
+penguins.loc[index]
+``` -->
+
+Podemos realizar las dos operaciones, seleccionar la variable `body_mass_g`, y calcular su máximo  con una sola instrucción:
+
+```{python}
+penguins["body_mass_g"].max()
+```
+
+::: {#exr-subset-variable-1}
+Calcula  el peso medio  de todos los pingüinos (función `mean()`).
+:::
+
+::: {#exr-subset-variable-2}
+Calcula el valor mínimo para la longitud de las alas de todos los pingüinos (función `min()`).
+:::
+
+
+## Seleccionar una lista de variables
+
+Para seleccionar las dos variables relativas a las dimensiones del pico, `bill_length_mm` y  `bill_depth_mm`, ejecuta la siguiente instrucción:
+
+```{python}
+bill = penguins[["bill_length_mm", "bill_depth_mm"]]
+```
+
+::: {.callout-note}
+Para seleccionar una lista de variables, usa corchetes `[]` adicionales para crear la lista con los nombres de las columnas de interés (los corchetes exteriores indican que se van a seleccionar datos y los interiores crean la lista).
+:::
+
+Ahora podemos calcular la media para ambas variables con 
+
+```{python}
+bill.mean()
+```
+
+::: {#exr-subset-variables-3}
+Calcula el número de observaciones no nulas (función `count()`) para las variables `species` y `body_mass_g` con una sola línea de código.
+:::
+
+
+## `DataFrame` vs `Series` 
+
+Ejecutando 
+
+```{python}
+type(bill)
+```
+vemos que el objeto `bill` que hemos creado antes al extraer las dos variables sobre las dimensiones del pico es de tipo `DataFrame`, igual que la hoja de datos original `penguins`.
+
+
+Pero ejecutando 
+```{python}
+type(mass)
+```
+vemos que el objeto `mass` que hemos creado antes al extraer la variable `body_mass_g` es de un nuevo tipo, llamado `Series`. 
+
+`Series` es el tipo de datos que usa `pandas` para almacenar vectores unidimensionales, representando un conjunto de observaciones de una variable. 
+
+Podemos usar el método `head()` para ver los cinco primeros valores de la variable:
+
+```{python}
+mass.head(5)
+```
+Aprecia que `mass` tiene el mismo índice que la hoja de datos `penguins`:
+
+```{python}
+mass.index
+```
+
+Podemos ver una hoja de datos (`DataFrame`) como un conjunto de variables (`Series`), dispuestas en columnas,  que comparten un índice común.
+
+::: {#exr-series}
+Averigua si los siguientes objetos son de tipo `Series` o `DataFrame`:
+
+1. `penguins["flipper_length_mm"]`
+
+2. `penguins[["flipper_length_mm"]]`
+:::
+
+Generalmente al aplicar un método propio de la clase `Series` a un objeto de clase `DataFrame`, se obtiene el mismo resultado que si se aplicara el método a cada una de las variables de la hoja de datos. Como hicimos antes al calcular simultáneamente la media de las dos variables en la hoja de datos `bill` con `bill.mean()`. 
+
+
+Pero hay métodos propios de `Series` que no pueden aplicarse a `DataFrame`, métodos propios de `DataFrame` que no pueden aplicarse a `Series`, y métodos comunes a `Series` y `DataFrame` pero que requieren diferentes argumentos en cada caso. Por ejemplo, el método `Series.sort_values()` ordena los valores de una variable de mayor a menor. Puedes comprobarlo con
+
+```{python}
+mass.sort_values().head(5)
+```
+
+Sin embargo  el método `DataFrame.sort_values()` no puede aplicarse sin argumentos. 
+
+::: {#exr-sort_values}
+Verifica que al ejecutar `bill.sort_values()` se obtiene un error e intenta interpretarlo y corregirlo. 
+:::
+
+
+

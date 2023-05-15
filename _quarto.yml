@@ -1,0 +1,70 @@
+project:
+  type: mnye-book
+  resources: 
+    - info/info.html # relacionado: book.sidebar.tools
+    - info/info_files/**
+
+book:
+  title: "Exploración y visualización de datos con Python"
+  output-file: "visualization" # nombre PDF
+  author: "Eva María Mazcuñán Navarro"
+  # date: "last-modified"
+  chapters:
+    - index.qmd
+    - chapters/intro.qmd
+    - chapters/libraries.qmd  
+    - chapters/data.qmd
+    # - chapters/subset.qmd
+    - chapters/subset-variables.qmd
+    - chapters/tbc.qmd
+    # - chapters/1categorical.qmd
+    # - chapters/1numerical.qmd
+    # - chapters/groupby.qmd
+    # - chapters/2categorical.qmd
+    # - chapters/numerical_by_categorical.qmd
+    # - chapters/problems.qmd
+    - chapters/references.qmd
+  repo-url: https://github.com/EMazcunan/mnye2223-data-visualization
+  # issue-url:  
+  downloads: [pdf]
+  cover-image: img/cover/cover.png
+  sidebar: 
+    logo: img/sidebar-logo.png
+    # tools:  # relacionado: project.resources
+    #   - icon: info-circle
+    #     text: Inicio
+    #     href: /info/info.html
+  # favicon: img/cover.png
+
+  # page-footer:
+  #   left: |
+  #     R for Data Science (2e) was written by Hadley Wickham, Mine
+  #     Çetinkaya-Rundel, and Garrett Grolemund.
+  #   right: |
+  #     This book was built with <a href="https://quarto.org/">Quarto</a>.  
+# number-sections: true
+# top-level-division: chapter
+# number-depth: 5
+# # toc-depth: 3
+# top-level-division: part
+# shift-heading-level-by: 1
+# # shift-heading-level-by: -1
+mnye-book:
+  # pretitle: TEMA 6
+  term: 2022-2023
+  degree: "Grado en Ingeniería Informática / Mecánica"
+nocite: |
+  @reback2020pandas, @mckinney-proc-scipy-2010, @Waskom2021
+
+# code-overflow: wrap
+
+
+fig-align: center # no tiene efecto sin caption
+
+format:
+  mnye-book-html: 
+    css: html/styles.css 
+  mnye-book-pdf: 
+    include-in-header: 
+      - pdf/preamble.tex
+

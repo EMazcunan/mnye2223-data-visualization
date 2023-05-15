@@ -1,0 +1,46 @@
+<!-- https://github.com/quarto-dev/quarto-cli/discussions/3842 -->
+<!-- Ver nota de obsidian Quarto - Layout de book para los literales 1.5em y 3em -->
+<div id="progress-bar" style="width: 0%; height: 7px; background-color: var(--bs-success); position: fixed; top: 0px; margin-left:-1.5em;z-index: 2000;"></div>
+
+<div id="progress-bar-bg" style="width: 0%; height: 7px; background-color: var(--quarto-border-color); position: fixed; top: 0px; margin-left:-1.5em;z-index: 1999;"></div>
+
+<script id="progressbar" type="text/javascript">
+
+function adjust_bar_width(bar, bar_bg, scrollTop, height, clientHeight, document_content_width, font_size, content_width) {
+    bar.style.width = ((scrollTop) / ((height- clientHeight))) * ((document_content_width + (font_size * 3)) / content_width) * 100 + '%';
+
+    bar_bg.style.width = document_content_width + (font_size * 3) + "px";
+};
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const bar = document.querySelector('#progress-bar');
+    const bar_bg = document.querySelector('#progress-bar-bg');
+    const post = document.querySelector('#quarto-content');
+    const document_content = document.querySelector('#quarto-document-content');
+
+    const style = window.getComputedStyle(document_content, null).getPropertyValue('font-size');
+    const font_size = parseFloat(style); 
+    const html = document.documentElement;
+    
+    var document_content_width = document_content.offsetWidth;
+    var content_width = post.offsetWidth;
+    var height = post.scrollHeight + post.offsetTop; 
+
+    window.addEventListener('resize', () => {
+
+        document_content_width = document_content.offsetWidth;
+        content_width = post.offsetWidth;
+        height = post.scrollHeight + post.offsetTop; 
+
+        adjust_bar_width(bar, bar_bg, html.scrollTop, height, html.clientHeight, document_content_width, font_size, content_width )
+
+    });  
+
+    window.addEventListener('scroll', () => {
+        
+        adjust_bar_width(bar, bar_bg, html.scrollTop, height, html.clientHeight, document_content_width, font_size, content_width)
+    });
+});
+</script>

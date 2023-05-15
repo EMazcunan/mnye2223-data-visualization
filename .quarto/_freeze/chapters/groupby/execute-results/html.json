@@ -1,0 +1,11 @@
+{
+  "hash": "0a64a0dfa1d3340ebae5982a3ba43462",
+  "result": {
+    "markdown": "# Agrupar por categorías\n\n\n\n- [ ] Habiendo descubierto el argumento `subset` de `value_counts()` y el método `unstack()` (ver en mis apuntes de pandas `Gráficos > Diagramas de barras > Dos variables` y `Gráficos > Diagramas de barras > Tres variables`) puede que esta sección no haga falta hasta analizar variable numérica por categorías. \n\n<!--  -->\n- Split\n- Apply\n- Combine\n\nUn ejemplo sencillo como aplicar `sum()`.\n\nO también tamaño muestral:\n\n```\ndf.groupby(\"grade3\").size()\n```\n\n",
+    "supporting": [
+      "groupby_files/figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

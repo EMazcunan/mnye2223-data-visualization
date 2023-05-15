@@ -1,0 +1,46 @@
+<header id="title-block-header">
+$if(titlepage)$ 
+
+$if(mnye-book.pretitle)$    
+<h1 class="title">$mnye-book.pretitle$: $book.title$</h1>
+$else$
+<h1 class="title">$book.title$</h1>
+$endif$
+
+$if(subtitle)$
+<p class="subtitle">$subtitle$</p>
+$endif$
+
+<p class="author-title">Autor</p> 
+$for(author)$
+<p class="author">$author$</p>
+$endfor$
+
+$if(date)$
+<p class="date-title">Fecha</p> 
+<p class="date">$date$</p>
+$endif$
+
+<!-- https://github.com/quarto-dev/quarto-cli/issues/2235 -->
+<div class="subject-info">
+<p class="subject-info-title">Asignatura</p>    
+$if(mnye-book.degree)$
+<p class="subject">Métodos Numéricos y Estadísticos</p>
+<p class="degree">$mnye-book.degree$</p>
+$endif$
+$if(mnye-book.term)$
+<p class="term">Curso $mnye-book.term$</p>
+$endif$
+</div>
+
+$if(abstract)$
+<div class="abstract">
+<div class="abstract-title">$abstract-title$</div>
+$abstract$
+</div>
+$endif$
+
+$else$
+<h1 class="title">$title$</h1>
+$endif$
+</header>

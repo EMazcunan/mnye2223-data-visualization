@@ -1,0 +1,15 @@
+# Referencias {#sec-references .unnumbered .unlisted}
+
+<!-- https://github.com/quarto-dev/quarto-cli/issues/2770 -->
+
+::: {.content-visible when-format="html"}
+:::
+
+
+::: {.content-visible when-format="pdf"}
+:::
+
+::: {#refs .content-visible when-format="html"}
+:::
+
+

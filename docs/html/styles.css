@@ -1,0 +1,20 @@
+.theorem.exercise{
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+}
+.theorem.exercise .theorem-title {
+    display: block;
+}
+.quarto-light .theorem.exercise{
+    background-color:bisque;
+}
+.quarto-dark .theorem.exercise{
+    background-color:darkslategray;
+}
+
+
+
+
+
+
+

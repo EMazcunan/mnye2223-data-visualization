@@ -1,0 +1,11 @@
+{
+  "hash": "7d5017d1f6b4518e049f45db5f1549e3",
+  "result": {
+    "markdown": "---\ntitle: Dos variables categóricas\neditor:\n    render-on-save: true\n---\n\n\n- [ ] Ver lo que tengo explorado en mi manual de pandas en apartados `Gráficos > Diagramas de barras > Dos variables` y `Gráficos > Diagramas de barras > Tres variables`. \n\n\n## Tablas de frecuencias\n\n\n## Tablas de contingencia\n\n```\npd.crosstab(df2[\"factor1\"], df2[\"factor2\"])\n```\n\n```\npd.crosstab(\n    df2[\"factor1\"], \n    [df2[\"factor2\"], df2[\"factor3\"]]\n)\n```\n\n",
+    "supporting": [
+      "2categorical_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

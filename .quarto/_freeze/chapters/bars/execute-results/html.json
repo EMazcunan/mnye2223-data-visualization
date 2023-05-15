@@ -1,0 +1,11 @@
+{
+  "hash": "422d7520b9b6c1c56410b538ada4ca17",
+  "result": {
+    "markdown": "# Diagramas de barras {#sec-bars}\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport pandas as pd\nimport random\n```\n:::\n\n\n## Datos resumidos\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\ndata = pd.Series(\n    [40,10],\n    index = [\"Acierto\", \"Fallo\"]\n)\ndata.plot(kind=\"bar\")\n```\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\n<AxesSubplot:>\n```\n:::\n\n::: {.cell-output .cell-output-display}\n![](bars_files/figure-html/cell-3-output-2.png){width=566 height=445}\n:::\n:::\n\n\n::: {.cell execution_count=3}\n``` {.python .cell-code}\ndates = pd.date_range(start=\"20230404\", periods=6, freq=\"D\")\ncounts = [random.randrange(1, 50, 1) for i in range(6)]\ns3 = pd.Series(data=counts, index = dates)\ns3\n```\n\n::: {.cell-output .cell-output-display execution_count=3}\n```\n2023-04-04    32\n2023-04-05    19\n2023-04-06    13\n2023-04-07     1\n2023-04-08    38\n2023-04-09    45\nFreq: D, dtype: int64\n```\n:::\n:::\n\n\n::: {.cell execution_count=4}\n``` {.python .cell-code}\ns3.plot(kind=\"bar\")\n```\n\n::: {.cell-output .cell-output-display execution_count=4}\n```\n<AxesSubplot:>\n```\n:::\n\n::: {.cell-output .cell-output-display}\n![](bars_files/figure-html/cell-5-output-2.png){width=566 height=540}\n:::\n:::\n\n\n",
+    "supporting": [
+      "bars_files/figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

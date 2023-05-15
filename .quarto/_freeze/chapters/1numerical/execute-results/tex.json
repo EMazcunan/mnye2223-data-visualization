@@ -1,0 +1,10 @@
+{
+  "hash": "292dfc86f5aeb017f53879c5e9354feb",
+  "result": {
+    "markdown": "---\ntitle: Una variable numérica\neditor:\n    render-on-save: true\n---\n\n\n## El método `describe()`\n\n## Histograma\n\n- [ ] Están `Dataframe.plot.hist()` y `Dataframe.hist()`\n\n## Diagrama de caja y bigotes\n\n- [ ] Están `Dataframe.plot.box()` y `Dataframe.boxplot()`\n\n",
+    "supporting": [
+      "1numerical_files"
+    ],
+    "filters": []
+  }
+}
