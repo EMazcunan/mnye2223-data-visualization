@@ -154,7 +154,7 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Exploración y visualización de datos con Python</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="../info/info.html" title="Inicio" class="quarto-navigation-tool px-1" aria-label="Inicio"><i class="bi bi-info-circle"></i></a>
+    <a href="https://github.com/EMazcunan/mnye2223-data-visualization" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="../visualization.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo lector">
@@ -204,32 +204,8 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/1categorical.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Una variable categórica</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/1numerical.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Una variable numérica</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/groupby.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Agrupar por categorías</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/2categorical.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dos variables categóricas</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/numerical_by_categorical.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variable numérica por categorías</span></span></a>
+  <a href="../chapters/tbc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Continuará …</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -264,7 +240,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#índice" id="toc-índice" class="nav-link" data-scroll-target="#índice"><span class="header-section-number">2.6</span> Índice</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EMazcunan/mnye2223-data-visualization/blob/master/chapters/data.qmd" class="toc-action">Ver el código</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -701,7 +677,7 @@ memory usage: 18.9+ KB</code></pre>
 </div>
 </div>
 </div>
-<p>ahora sabes que el primer pingüino es de la especie Adelie, vive en la isla Torgensen, las dimensiones de su pico son <span class="math inline">\(39.1 \times 18.7\)</span> milímetros, sus alas miden <span class="math inline">\(181\)</span> milímetros, pesa <span class="math inline">\(3750\)</span> gramos, y es una hembra.</p>
+<p>ahora sabes que el primer pingüino es de la especie Adelie, vive en la isla Torgensen, las dimensiones de su pico son <span class="math inline">\(39.1 \times 18.7\)</span> milímetros, sus alas miden <span class="math inline">\(181\)</span> milímetros, pesa <span class="math inline">\(3\)</span> kilos y <span class="math inline">\(750\)</span> gramos, y es un macho.</p>
 <div id="exr-data" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 2.1 </strong></span>Describe las características del tercer pingüino del estudio (índice 2).</p>
 <!-- :::{.solution}
@@ -732,6 +708,41 @@ memory usage: 18.9+ KB</code></pre>
 </div>
 <p>Los valores nulos o perdidos son valores no disponibles, que no han podido registrarse, se representan con el símbolo <code>NaN</code> (iniciales de <em>Not A Number</em>).</p>
 <p>Si vuelves a mirar las cinco primeras filas de la hoja de datos verás que para el cuarto pingüino sólo sabemos que es de la especie Adelie y vive el la isla Torgersen, y se desconocen las otras cinco variables.</p>
+<div class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 <p>Los diferentes métodos de la librería <code>pandas</code> contemplan la posibilidad de que las hojas de datos tengan valores nulos y los tratan de un forma predeterminada (por ejemplo, la media los ignora por defecto).</p>
 </section>
 <section id="tipos-de-variables" class="level3" data-number="2.5.3">
@@ -742,7 +753,7 @@ memory usage: 18.9+ KB</code></pre>
 <li><p>Las cuatro restantes, <code>bill_length_mm</code>, <code>bill_depth_mm</code>, <code>flipper_length_mm</code> y <code>body_mass_g</code> son <strong>variables numéricas</strong>, que representan características cuantitativas que se describen con valores numéricos (números enteros o reales).</p></li>
 </ol>
 <p><code>pandas</code> asigna un tipo a cada variable de una hoja de datos en función de los valores que presenta, como puede verse en la columna <code>Dtype</code> de la salida del método <code>info()</code>:</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="12">
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 344 entries, 0 to 343
@@ -774,8 +785,8 @@ Para variables categóricas podremos calcular el recuento de observaciones en ca
 <section id="índice" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="índice"><span class="header-section-number">2.6</span> Índice</h2>
 <p>Igual que cada columna (variable) en una hoja de datos tiene un nombre, cada fila (observación) también tiene una etiqueta identificativa. En nuestra hoja de datos cada uno de los <span class="math inline">\(344\)</span> pingüinos se identifica con un número entero de la secuencia 0, 1, …, 333.</p>
-<div class="cell" data-execution_count="12">
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
@@ -829,8 +840,8 @@ Para variables categóricas podremos calcular el recuento de observaciones en ca
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="13">
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
 
@@ -885,13 +896,13 @@ Para variables categóricas podremos calcular el recuento de observaciones en ca
 </div>
 </div>
 <p>Las etiquetas identificativas de las filas de una hoja de datos forman su <strong>índice</strong>. El índice de una hoja de datos de <code>pandas</code> se registra en su propiedad <code>index</code>.</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>penguins.index</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>RangeIndex(start=0, stop=344, step=1)</code></pre>
 </div>
 </div>
-<p>Si cada pingüino estuviera identificado por un código, podríamos haber indicado utilizar esa variable como índice en el momento de la importación de los datos. Cuando no se indica el índice de una hoja de datos de forma explícita, <code>pandas</code> asigna una secuencia de números enteros comenzando en 0, como ha ocurrido en nuestro caso.</p>
+<p>Si cada pingüino estuviera identificado por un código, podríamos haber indicado esa variable como índice en el momento de la importación de los datos. Cuando no se indica el índice de una hoja de datos de forma explícita, <code>pandas</code> asigna una secuencia de números enteros comenzando en 0, como ha ocurrido en nuestro caso.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

@@ -5,6 +5,8 @@ editor:
 
 ```{python}
 #| echo: false
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
 import seaborn as sns
 url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv"
@@ -39,7 +41,7 @@ Puedes consultar la documentación oficial de `pandas` [aquí](https://pandas.py
 
 ![](../img/seaborn){height="3em" fig-align="center"}
 
-`seaborn` es una librería para visualización de datos. Permite crear gráficos estadísticos visualmente atractivos con pocas líneas de código. Y está diseñado para trabajar con las estructuras de datos creadas con `pandas`.
+`seaborn` es una librería para visualización de datos. Permite crear gráficos estadísticos muy informativos y visualmente atractivos con pocas líneas de código. Y está diseñado para trabajar con las estructuras de datos creadas con `pandas`.
 
 Usaremos `seaborn` para realizar diferentes tipos de gráficos como diagramas de barras, histogramas, diagramas de caja y bigotes etc. 
 

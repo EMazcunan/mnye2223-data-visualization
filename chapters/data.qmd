@@ -6,6 +6,8 @@ editor:
 
 ```{python}
 #| include: false
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
 import seaborn as sns
 ```
@@ -119,7 +121,7 @@ Volviendo a mirar la primera fila de nuestra hoja de datos
 #| echo: false
 penguins.head(1)
 ```
-ahora sabes que el primer pingüino es de la especie Adelie, vive en la isla Torgensen, las dimensiones de su pico son $39.1 \times 18.7$ milímetros, sus alas miden $181$ milímetros, pesa $3750$ gramos, y es una hembra. 
+ahora sabes que el primer pingüino es de la especie Adelie, vive en la isla Torgensen, las dimensiones de su pico son $39.1 \times 18.7$ milímetros, sus alas miden $181$ milímetros, pesa $3$ kilos y $750$ gramos, y es un macho. 
 
 :::: {#exr-data}
 Describe las características del tercer pingüino del estudio (índice 2).
@@ -140,6 +142,11 @@ penguins.info()
 Los valores nulos o perdidos son valores no disponibles, que no han podido registrarse, se representan con el símbolo `NaN` (iniciales de _Not A Number_).
 
 Si vuelves a mirar las cinco primeras filas de la hoja de datos verás que para el cuarto pingüino sólo sabemos que es de la especie Adelie y vive el la isla Torgersen, y se desconocen las otras cinco variables. 
+
+```{python}
+#| echo: false
+penguins.loc[3:3]
+```
 
 Los diferentes métodos de la librería `pandas` contemplan la posibilidad de que las hojas de datos tengan valores nulos y los tratan de un forma predeterminada (por ejemplo, la media los ignora por defecto).
 
@@ -189,6 +196,6 @@ Las etiquetas identificativas de las filas de una hoja de datos forman su __índ
 penguins.index
 ```
 
-Si cada pingüino estuviera identificado por un código, podríamos haber indicado utilizar esa variable como índice en el momento de la importación de los datos. Cuando no se indica el índice de una hoja de datos de forma explícita, `pandas` asigna una secuencia de números enteros comenzando en 0, como ha ocurrido en nuestro caso.
+Si cada pingüino estuviera identificado por un código, podríamos haber indicado esa variable como índice en el momento de la importación de los datos. Cuando no se indica el índice de una hoja de datos de forma explícita, `pandas` asigna una secuencia de números enteros comenzando en 0, como ha ocurrido en nuestro caso.
 
 

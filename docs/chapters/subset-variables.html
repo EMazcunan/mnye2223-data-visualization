@@ -151,7 +151,7 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Exploración y visualización de datos con Python</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="../info/info.html" title="Inicio" class="quarto-navigation-tool px-1" aria-label="Inicio"><i class="bi bi-info-circle"></i></a>
+    <a href="https://github.com/EMazcunan/mnye2223-data-visualization" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="../visualization.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo lector">
@@ -229,7 +229,7 @@ div.csl-indent {
   <li><a href="#seleccionar-una-lista-de-variables" id="toc-seleccionar-una-lista-de-variables" class="nav-link" data-scroll-target="#seleccionar-una-lista-de-variables"><span class="header-section-number">3.2</span> Seleccionar una lista de variables</a></li>
   <li><a href="#dataframe-vs-series" id="toc-dataframe-vs-series" class="nav-link" data-scroll-target="#dataframe-vs-series"><span class="header-section-number">3.3</span> <code>DataFrame</code> vs <code>Series</code></a></li>
   </ul>
-</nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EMazcunan/mnye2223-data-visualization/blob/master/chapters/subset-variables.qmd" class="toc-action">Ver el código</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -339,7 +339,7 @@ backToTopButton.addEventListener("click", function () {
 <p>Ahora podemos aplicar la función <code>max()</code> para obtener el peso máximo:</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mass.<span class="bu">max</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>6300.0</code></pre>
 </div>
 </div>
@@ -351,7 +351,7 @@ penguins.loc[index]
 <p>Podemos realizar las dos operaciones, seleccionar la variable <code>body_mass_g</code>, y calcular su máximo con una sola instrucción:</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">"body_mass_g"</span>].<span class="bu">max</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>6300.0</code></pre>
 </div>
 </div>
@@ -381,7 +381,7 @@ penguins.loc[index]
 <p>Ahora podemos calcular la media para ambas variables con</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bill.mean()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>bill_length_mm    43.92193
 bill_depth_mm     17.15117
 dtype: float64</code></pre>
@@ -396,7 +396,7 @@ dtype: float64</code></pre>
 <p>Ejecutando</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(bill)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>pandas.core.frame.DataFrame</code></pre>
 </div>
 </div>
@@ -404,7 +404,7 @@ dtype: float64</code></pre>
 <p>Pero ejecutando</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(mass)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>pandas.core.series.Series</code></pre>
 </div>
 </div>
@@ -413,7 +413,7 @@ dtype: float64</code></pre>
 <p>Podemos usar el método <code>head()</code> para ver los cinco primeros valores de la variable:</p>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mass.head(<span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>0    3750.0
 1    3800.0
 2    3250.0
@@ -425,7 +425,7 @@ Name: body_mass_g, dtype: float64</code></pre>
 <p>Aprecia que <code>mass</code> tiene el mismo índice que la hoja de datos <code>penguins</code>:</p>
 <div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mass.index</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>RangeIndex(start=0, stop=344, step=1)</code></pre>
 </div>
 </div>
@@ -441,7 +441,7 @@ Name: body_mass_g, dtype: float64</code></pre>
 <p>Pero hay métodos propios de <code>Series</code> que no pueden aplicarse a <code>DataFrame</code>, métodos propios de <code>DataFrame</code> que no pueden aplicarse a <code>Series</code>, y métodos comunes a <code>Series</code> y <code>DataFrame</code> pero que requieren diferentes argumentos en cada caso. Por ejemplo, el método <code>Series.sort_values()</code> ordena los valores de una variable de mayor a menor. Puedes comprobarlo con</p>
 <div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mass.sort_values().head(<span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>190    2700.0
 64     2850.0
 58     2850.0

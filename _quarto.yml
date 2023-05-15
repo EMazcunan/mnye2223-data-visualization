@@ -61,6 +61,9 @@ nocite: |
 
 fig-align: center # no tiene efecto sin caption
 
+execute:
+  warning: false
+
 format:
   mnye-book-html: 
     css: html/styles.css 

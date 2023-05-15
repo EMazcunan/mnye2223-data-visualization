@@ -6,6 +6,8 @@ title: Seleccionar variables
 
 ```{python}
 #| include: false
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
 import seaborn as sns
 ```

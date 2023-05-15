@@ -196,6 +196,22 @@
 \usepackage{multido}
 \tikzexternaldisable
 \makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
 \makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
@@ -270,6 +286,7 @@
 \fi
 \usepackage[backend=biber]{biblatex}
 \addbibresource{references.bib}
+\nocite{reback2020pandas, mckinney-proc-scipy-2010, Waskom2021}
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
@@ -292,7 +309,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, frame hidden, boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, interior hidden, enhanced, sharp corners]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Contenidos}
 {
@@ -307,6 +324,7 @@
 }
 \bookmarksetup{startatroot}
 
+\addcontentsline{toc}{section}{Inicio}
 
 
 \bookmarksetup{startatroot}
@@ -316,8 +334,8 @@
 \addcontentsline{toc}{section}{Introducción}
 
 
-En esta práctica aprenderás las técnicas básicas para explorar un
-conjunto de datos con Python.
+En esta práctica aprenderás las técnicas básicas para explorar y
+visualizar un conjunto de datos con Python.
 
 \hypertarget{los-pinguxfcinos-del-archipiuxe9lago-palmer}{%
 \subsection*{Los pingüinos del archipiélago
@@ -327,8 +345,8 @@ Palmer}\label{los-pinguxfcinos-del-archipiuxe9lago-palmer}}
 \markright{Los pingüinos del archipiélago Palmer}
 
 Presentaremos las diferentes técnicas a través de ejemplos trabajando
-con un conjunto de datos relativos a características morfológicas de
-tres especies de pingüinos del archipiélago Palmer en la Antártida.
+con un conjunto de datos relativos a diferentes características de tres
+especies de pingüinos del archipiélago Palmer en la Antártida.
 
 \begin{figure}[tbph]
 
@@ -364,49 +382,87 @@ Aprenderás en concreto a calcular las medidas descriptivas más
 representativas de las características de interés y a crear diferentes
 tipos de gráficos o visualizaciones.
 
-\begin{itemize}
-\tightlist
-\item[$\square$]
-  Añadir un ejemplo de tabla y un ejemplo de gráfico. Por ejemplo, peso
-  por especies.
-\end{itemize}
-
 \bookmarksetup{startatroot}
 
 \hypertarget{libreruxedas}{%
 \section{Librerías}\label{libreruxedas}}
 
+Lo primero que necesitamos hacer es importar las librerías de Python que
+usaremos a lo largo de práctica, que son \texttt{pandas} y
+\texttt{seaborn}:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{pandas}{%
 \subsection{\texorpdfstring{\texttt{pandas}}{pandas}}\label{pandas}}
 
-\hypertarget{sub}{%
-\subsubsection{sub}\label{sub}}
-
 \begin{figure}[tbph]
 
-{\centering \includegraphics[width=\textwidth,height=5em]{chapters/../img/pandas.png}
+{\centering \includegraphics[width=\textwidth,height=4em]{chapters/../img/pandas.png}
 
 }
 
 \end{figure}
 
+\texttt{pandas} es una librería que permite leer datos almacenados en
+estructuras similares a una tabla, como las hojas de cálculo o los
+archivos CSV, y proporciona métodos para explorar y describir esos
+datos.
+
+Usando esta librería podremos calcular por ejemplo el peso medio de los
+pingüinos de cada especie. Obtendremos esta tabla:
+
+\begin{tabular}{lr}
+\toprule
+{} &  body\_mass\_g \\
+species   &              \\
+\midrule
+Adelie    &  3700.662252 \\
+Chinstrap &  3733.088235 \\
+Gentoo    &  5076.016260 \\
+\bottomrule
+\end{tabular}
+
+Puedes consultar la documentación oficial de \texttt{pandas}
+\href{https://pandas.pydata.org/docs/index.html}{aquí}.
+
+\hypertarget{seaborn}{%
+\subsection{\texorpdfstring{\texttt{seaborn}}{seaborn}}\label{seaborn}}
+
 \begin{figure}[tbph]
 
-{\centering \includegraphics[width=\textwidth,height=5em]{chapters/../img/pandas.png}
+{\centering \includegraphics[width=\textwidth,height=3em]{chapters/../img/seaborn.png}
 
 }
 
 \end{figure}
 
-\hypertarget{numpy}{%
-\subsection{\texorpdfstring{\texttt{numpy}}{numpy}}\label{numpy}}
+\texttt{seaborn} es una librería para visualización de datos. Permite
+crear gráficos estadísticos muy informativos y visualmente atractivos
+con pocas líneas de código. Y está diseñado para trabajar con las
+estructuras de datos creadas con \texttt{pandas}.
+
+Usaremos \texttt{seaborn} para realizar diferentes tipos de gráficos
+como diagramas de barras, histogramas, diagramas de caja y bigotes etc.
+
+Aprenderemos por ejemplo a crear el siguiente gráfico, con los diagramas
+de caja y bigotes para el peso de los pingüinos de cada especie.
+
+\begin{figure}[tbph]
+
+{\centering \includegraphics{chapters/libraries_files/figure-pdf/cell-5-output-1.pdf}
+
+}
+
+\end{figure}
+
+Puedes consultar la documentación oficial de \texttt{seaborn}
+\href{https://seaborn.pydata.org/index.html}{aquí}.
 
 \bookmarksetup{startatroot}
 
@@ -438,6 +494,16 @@ de nombre \texttt{penguins}:
 El objeto \texttt{penguins} que acabas de crear es una \textbf{hoja de
 datos}, representada en \texttt{pandas} con la clase \texttt{DataFrame}.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{type}\NormalTok{(penguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+pandas.core.frame.DataFrame
+\end{verbatim}
+
 En los siguientes apartados aprenderás a realizar una exploración
 inicial de la hoja de datos \texttt{penguins} que acabas de crear para
 conocer su estructura y la información que contiene.
@@ -464,8 +530,9 @@ consulta su propiedad \texttt{shape}:
 Vemos que nuestra hoja de datos tiene \texttt{344} filas y \texttt{7}
 columnas.
 
-\hypertarget{visualizaciuxf3n}{%
-\subsection{Visualización}\label{visualizaciuxf3n}}
+\hypertarget{primeras-y-uxfaltimas-filas}{%
+\subsection{Primeras y últimas
+filas}\label{primeras-y-uxfaltimas-filas}}
 
 Con las siguientes instrucciones puedes visualizar las cinco primeras y
 últimas filas de la hoja de datos \texttt{penguins} que acabas de crear.
@@ -475,12 +542,6 @@ Con las siguientes instrucciones puedes visualizar las cinco primeras y
 \NormalTok{penguins.head(}\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-/home/eva/.local/lib/python3.10/site-packages/IPython/core/formatters.py:342: FutureWarning:
-
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-\end{verbatim}
 
 \begin{tabular}{lllrrrrl}
 \toprule
@@ -500,12 +561,6 @@ In future versions `DataFrame.to_latex` is expected to utilise the base implemen
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-/home/eva/.local/lib/python3.10/site-packages/IPython/core/formatters.py:342: FutureWarning:
-
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-\end{verbatim}
-
 \begin{tabular}{lllrrrrl}
 \toprule
 {} & species &  island &  bill\_length\_mm &  bill\_depth\_mm &  flipper\_length\_mm &  body\_mass\_g &     sex \\
@@ -524,7 +579,6 @@ In future versions `DataFrame.to_latex` is expected to utilise the base implemen
 En nuestra hoja de datos \texttt{penguins}:
 
 \begin{itemize}
-\tightlist
 \item
   Cada columna representa una variable asociada a una propiedad o
   característica de los pingüinos. Por ejemplo, la primera columna, de
@@ -539,13 +593,7 @@ En nuestra hoja de datos \texttt{penguins}:
   correspondiente fila.
 \end{itemize}
 
-Por ejemplo, en la primera celda de la hoja de datos
-
-\begin{verbatim}
-/home/eva/.local/lib/python3.10/site-packages/IPython/core/formatters.py:342: FutureWarning:
-
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-\end{verbatim}
+Por ejemplo, mirando la primera fila de la hoja de datos
 
 \begin{tabular}{lllrrrrl}
 \toprule
@@ -555,7 +603,8 @@ In future versions `DataFrame.to_latex` is expected to utilise the base implemen
 \bottomrule
 \end{tabular}
 
-vemos que el primer pingüino del listado es de la especie Adelie.
+vemos en la primera celda que el primer pingüino del listado es de la
+especie Adelie.
 
 Unos mismos datos pueden organizarse o presentarse de diferentes maneras
 en diferentes hojas de datos. Para que sea sencillo trabajar con una
@@ -609,8 +658,11 @@ dtypes: float64(4), object(3)
 memory usage: 18.9+ KB
 \end{verbatim}
 
-La salida del método \texttt{info()} nos da una tabla anterior con
-información sobre las siete variables de nuestra hoja de datos.
+La salida del método \texttt{info()} nos da una tabla con información
+sobre las siete variables de nuestra hoja de datos.
+
+\hypertarget{descripciuxf3n}{%
+\subsubsection{Descripción}\label{descripciuxf3n}}
 
 En la columna de la tabla de nombre \texttt{Column} se lista el nombre
 de las siete variables en \texttt{penguins}. El significado de las
@@ -632,8 +684,10 @@ Descripción
 \texttt{species} & Especie de pingüinos (Chinstrap, Adélie o Gentoo) \\
 \texttt{island} & Nombre de la isla del archipíelago Palmer (Dream,
 Torgersen o Biscoe) \\
-\texttt{bill\_length\_mm} & Longitud del pico, en milímetros \\
-\texttt{bill\_depth\_mm} & Anchura del pico, en milímetros \\
+\texttt{bill\_length\_mm} & Longitud del pico, en milímetros (ver
+\figref{fig-bill}) \\
+\texttt{bill\_depth\_mm} & Anchura del pico, en milímetros (ver
+\figref{fig-bill}) \\
 \texttt{flipper\_length\_mm} & Longitud de las alas \\
 \texttt{body\_mass\_g} & Peso en gramos \\
 \texttt{sex} & Sexo (MALE o FEMALE) \\
@@ -641,22 +695,17 @@ Torgersen o Biscoe) \\
 
 \begin{figure}[tbph]
 
-{\centering \includegraphics[width=5.20833in,height=\textheight]{chapters/../img/culmen_depth.png}
+{\centering \includegraphics[width=4.16667in,height=\textheight]{chapters/../img/culmen_depth.png}
 
 }
 
-\caption{Ilustración de las variables \texttt{bill\_length\_mm} y
-\texttt{bill\_depth\_mm} (Artista @allison\_horst)}
+\caption{\label{fig-bill}Ilustración de las variables
+\texttt{bill\_length\_mm} y \texttt{bill\_depth\_mm} (Artista
+@allison\_horst)}
 
 \end{figure}
 
 Volviendo a mirar la primera fila de nuestra hoja de datos
-
-\begin{verbatim}
-/home/eva/.local/lib/python3.10/site-packages/IPython/core/formatters.py:342: FutureWarning:
-
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-\end{verbatim}
 
 \begin{tabular}{lllrrrrl}
 \toprule
@@ -668,11 +717,17 @@ In future versions `DataFrame.to_latex` is expected to utilise the base implemen
 
 ahora sabes que el primer pingüino es de la especie Adelie, vive en la
 isla Torgensen, las dimensiones de su pico son \(39.1 \times 18.7\)
-milímetros, sus alas miden \(181\) milímetros, pesa \(3750\) gramos, y
-es una hembra.
+milímetros, sus alas miden \(181\) milímetros, pesa \(3\) kilos y
+\(750\) gramos, y es un macho.
+
+\begin{exercise}[]% 
+\protect\hypertarget{exr-data}{}\label{exr-data}%
+Describe las características del tercer pingüino del estudio (índice 2).
+
+\end{exercise}
 
 \hypertarget{valores-nulos}{%
-\subsection{Valores nulos}\label{valores-nulos}}
+\subsubsection{Valores nulos}\label{valores-nulos}}
 
 Fíjate ahora en la columna \texttt{Non-Null\ Count} de la salida del
 método \texttt{info()}:
@@ -694,17 +749,50 @@ dtypes: float64(4), object(3)
 memory usage: 18.9+ KB
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item[$\square$]
-  TODO
-\end{itemize}
+Los valores nulos o perdidos son valores no disponibles, que no han
+podido registrarse, se representan con el símbolo \texttt{NaN}
+(iniciales de \emph{Not A Number}).
+
+Si vuelves a mirar las cinco primeras filas de la hoja de datos verás
+que para el cuarto pingüino sólo sabemos que es de la especie Adelie y
+vive el la isla Torgersen, y se desconocen las otras cinco variables.
+
+\begin{tabular}{lllrrrrl}
+\toprule
+{} & species &     island &  bill\_length\_mm &  bill\_depth\_mm &  flipper\_length\_mm &  body\_mass\_g &  sex \\
+\midrule
+3 &  Adelie &  Torgersen &             NaN &            NaN &                NaN &          NaN &  NaN \\
+\bottomrule
+\end{tabular}
+
+Los diferentes métodos de la librería \texttt{pandas} contemplan la
+posibilidad de que las hojas de datos tengan valores nulos y los tratan
+de un forma predeterminada (por ejemplo, la media los ignora por
+defecto).
 
 \hypertarget{tipos-de-variables}{%
-\subsection{Tipos de variables}\label{tipos-de-variables}}
+\subsubsection{Tipos de variables}\label{tipos-de-variables}}
 
-Fíjate ahora en la columna \texttt{Dtype} de la salida del método
-\texttt{info()}:
+Las siete variables de nuestra hoja de datos se dividen en dos clases:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{species}, \texttt{island} y \texttt{sex} son \textbf{variables
+  categóricas}. Este tipo de variables representan una característica
+  cualitativa que puede tomar un número finito y fijo de valores,
+  denominados categorías o niveles.
+\item
+  Las cuatro restantes, \texttt{bill\_length\_mm},
+  \texttt{bill\_depth\_mm}, \texttt{flipper\_length\_mm} y
+  \texttt{body\_mass\_g} son \textbf{variables numéricas}, que
+  representan características cuantitativas que se describen con valores
+  numéricos (números enteros o reales).
+\end{enumerate}
+
+\texttt{pandas} asigna un tipo a cada variable de una hoja de datos en
+función de los valores que presenta, como puede verse en la columna
+\texttt{Dtype} de la salida del método \texttt{info()}:
 
 \begin{verbatim}
 <class 'pandas.core.frame.DataFrame'>
@@ -723,33 +811,13 @@ dtypes: float64(4), object(3)
 memory usage: 18.9+ KB
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item[$\square$]
-  Hay \texttt{dtype} y \texttt{dtypes}
-\item[$\square$]
-  Numéricas vs categóricas
-\item[$\square$]
-  ¿Hablar aquí de conversión a categórica (\texttt{astype("category")})?
-\item[$\square$]
-  Mirar si \texttt{describe} se comporta diferente para numerica,
-  \texttt{object} y \texttt{category}.
-\end{itemize}
+\hypertarget{uxedndice}{%
+\subsection{Índice}\label{uxedndice}}
 
-\hypertarget{uxedndice-de-una-hoja-de-datos}{%
-\subsection{Índice de una hoja de
-datos}\label{uxedndice-de-una-hoja-de-datos}}
-
-Igual que cada columna tiene un nombre, cada fila también tiene una
-etiqueta identificativa. En nuestra hoja de datos cada uno de los
-\(344\) pingüinos se identifica con un número entero de la secuencia 0,
-1, \ldots, 333.
-
-\begin{verbatim}
-/home/eva/.local/lib/python3.10/site-packages/IPython/core/formatters.py:342: FutureWarning:
-
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-\end{verbatim}
+Igual que cada columna (variable) en una hoja de datos tiene un nombre,
+cada fila (observación) también tiene una etiqueta identificativa. En
+nuestra hoja de datos cada uno de los \(344\) pingüinos se identifica
+con un número entero de la secuencia 0, 1, \ldots, 333.
 
 \begin{tabular}{lllrrrrl}
 \toprule
@@ -760,12 +828,6 @@ In future versions `DataFrame.to_latex` is expected to utilise the base implemen
 2 &  Adelie &  Torgersen &            40.3 &           18.0 &              195.0 &       3250.0 &  FEMALE \\
 \bottomrule
 \end{tabular}
-
-\begin{verbatim}
-/home/eva/.local/lib/python3.10/site-packages/IPython/core/formatters.py:342: FutureWarning:
-
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-\end{verbatim}
 
 \begin{tabular}{lllrrrrl}
 \toprule
@@ -792,95 +854,171 @@ RangeIndex(start=0, stop=344, step=1)
 \end{verbatim}
 
 Si cada pingüino estuviera identificado por un código, podríamos haber
-indicado utilizar esa variable como índice en el momento de la
-importación de los datos. Cuando no se indica el índice de una hoja de
-datos de forma explícita, \texttt{pandas} asigna una secuencia de
-números enteros comenzando en 0, como ha ocurrido en nuestro caso.
-
-\begin{exercise}[]% 
-\protect\hypertarget{exr-data}{}\label{exr-data}%
-Describe las características del tercer pingüino del estudio (índice 2).
-
-\end{exercise}
+indicado esa variable como índice en el momento de la importación de los
+datos. Cuando no se indica el índice de una hoja de datos de forma
+explícita, \texttt{pandas} asigna una secuencia de números enteros
+comenzando en 0, como ha ocurrido en nuestro caso.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{una-variable-categuxf3rica}{%
-\section{Una variable categórica}\label{una-variable-categuxf3rica}}
+\hypertarget{seleccionar-variables}{%
+\section{Seleccionar variables}\label{seleccionar-variables}}
 
-\hypertarget{el-muxe9todo-describe}{%
-\subsection{\texorpdfstring{El método
-\texttt{describe()}}{El método describe()}}\label{el-muxe9todo-describe}}
+Al estudiar un conjunto de datos, es frecuente tener que seleccionar los
+datos relevantes para responder a las diferentes cuestiones planteadas.
+
+Si por ejemplo queremos saber cuál es el peso máximo de todos los
+pingüinos del estudio, seleccionaremos la variable
+\texttt{body\_mass\_g} y después calcularemos su máximo.
+
+En esta sección aprenderás los métodos para seleccionar variables de una
+hoja de datos.
+
+\hypertarget{seleccionar-una-variable}{%
+\subsection{Seleccionar una variable}\label{seleccionar-una-variable}}
+
+Utiliza la siguiente instrucción para seleccionar la variable
+\texttt{body\_mass\_g}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{species }\OperatorTok{=}\NormalTok{ penguins[[}\StringTok{"species"}\NormalTok{]]}
+\NormalTok{mass }\OperatorTok{=}\NormalTok{ penguins[}\StringTok{"body\_mass\_g"}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{species.describe()}
-\end{Highlighting}
-\end{Shaded}
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, leftrule=.75mm, opacityback=0, toprule=.15mm, arc=.35mm, rightrule=.15mm, colback=white, left=2mm, breakable]
+\begin{minipage}[t]{5.5mm}
+\textcolor{quarto-callout-note-color}{\faInfo}
+\end{minipage}%
+\begin{minipage}[t]{\textwidth - 5.5mm}
 
-\begin{verbatim}
-C:\Users\Usuario\AppData\Local\Programs\Python\Python310\lib\site-packages\IPython\core\formatters.py:343: FutureWarning:
+Para seleccionar una sola variable, usa corchetes \texttt{{[}{]}} e
+indica el nombre de la columna de interés.
 
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-\end{verbatim}
+\end{minipage}%
+\end{tcolorbox}
 
-\begin{tabular}{ll}
-\toprule
-{} & species \\
-\midrule
-count  &     344 \\
-unique &       3 \\
-top    &  Adelie \\
-freq   &     152 \\
-\bottomrule
-\end{tabular}
-
-\begin{itemize}
-\item[$\square$]
-  Decir las funciones individuales.
-\item[$\square$]
-  ¿Hay diferencia entre convertirla a categórica
-  (\texttt{astype("category")}) o no ?
-\end{itemize}
-
-\hypertarget{tabla-de-frecuencias}{%
-\subsection{Tabla de frecuencias}\label{tabla-de-frecuencias}}
-
-Tabla de frecuencias absolutas:
+Ahora podemos aplicar la función \texttt{max()} para obtener el peso
+máximo:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{species\_counts }\OperatorTok{=}\NormalTok{ penguins.value\_counts(subset}\OperatorTok{=}\StringTok{"species"}\NormalTok{)}
-\NormalTok{species\_counts}
+\NormalTok{mass.}\BuiltInTok{max}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-C:\Users\Usuario\AppData\Local\Programs\Python\Python310\lib\site-packages\IPython\core\formatters.py:343: FutureWarning:
-
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+6300.0
 \end{verbatim}
+
+Vemos que el pingüino más pesado del estudio pesa \(6\) kilos y \(300\)
+gramos.
+
+Podemos realizar las dos operaciones, seleccionar la variable
+\texttt{body\_mass\_g}, y calcular su máximo con una sola instrucción:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins[}\StringTok{"body\_mass\_g"}\NormalTok{].}\BuiltInTok{max}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+6300.0
+\end{verbatim}
+
+\begin{exercise}[]% 
+\protect\hypertarget{exr-subset-variable-1}{}\label{exr-subset-variable-1}%
+Calcula el peso medio de todos los pingüinos (función \texttt{mean()}).
+
+\end{exercise}
+
+\begin{exercise}[]% 
+\protect\hypertarget{exr-subset-variable-2}{}\label{exr-subset-variable-2}%
+Calcula el valor mínimo para la longitud de las alas de todos los
+pingüinos (función \texttt{min()}).
+
+\end{exercise}
+
+\hypertarget{seleccionar-una-lista-de-variables}{%
+\subsection{Seleccionar una lista de
+variables}\label{seleccionar-una-lista-de-variables}}
+
+Para seleccionar las dos variables relativas a las dimensiones del pico,
+\texttt{bill\_length\_mm} y \texttt{bill\_depth\_mm}, ejecuta la
+siguiente instrucción:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bill }\OperatorTok{=}\NormalTok{ penguins[[}\StringTok{"bill\_length\_mm"}\NormalTok{, }\StringTok{"bill\_depth\_mm"}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, leftrule=.75mm, opacityback=0, toprule=.15mm, arc=.35mm, rightrule=.15mm, colback=white, left=2mm, breakable]
+\begin{minipage}[t]{5.5mm}
+\textcolor{quarto-callout-note-color}{\faInfo}
+\end{minipage}%
+\begin{minipage}[t]{\textwidth - 5.5mm}
+
+Para seleccionar una lista de variables, usa corchetes \texttt{{[}{]}}
+adicionales para crear la lista con los nombres de las columnas de
+interés (los corchetes exteriores indican que se van a seleccionar datos
+y los interiores crean la lista).
+
+\end{minipage}%
+\end{tcolorbox}
+
+Ahora podemos calcular la media para ambas variables con
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bill.mean()}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{tabular}{lr}
 \toprule
-{} &    0 \\
-species   &      \\
+{} &         0 \\
 \midrule
-Adelie    &  152 \\
-Gentoo    &  124 \\
-Chinstrap &   68 \\
+bill\_length\_mm &  43.92193 \\
+bill\_depth\_mm  &  17.15117 \\
 \bottomrule
 \end{tabular}
 
+\begin{exercise}[]% 
+\protect\hypertarget{exr-subset-variables-3}{}\label{exr-subset-variables-3}%
+Calcula el número de observaciones no nulas (función \texttt{count()})
+para las variables \texttt{species} y \texttt{body\_mass\_g} con una
+sola línea de código.
+
+\end{exercise}
+
+\hypertarget{dataframe-vs-series}{%
+\subsection{\texorpdfstring{\texttt{DataFrame} vs
+\texttt{Series}}{DataFrame vs Series}}\label{dataframe-vs-series}}
+
+Ejecutando
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\BuiltInTok{type}\NormalTok{(species\_counts)}
+\BuiltInTok{type}\NormalTok{(bill)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+pandas.core.frame.DataFrame
+\end{verbatim}
+
+vemos que el objeto \texttt{bill} que hemos creado antes al extraer las
+dos variables sobre las dimensiones del pico es de tipo
+\texttt{DataFrame}, igual que la hoja de datos original
+\texttt{penguins}.
+
+Pero ejecutando
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{type}\NormalTok{(mass)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -888,373 +1026,113 @@ Chinstrap &   68 \\
 pandas.core.series.Series
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{species\_counts.index}
-\end{Highlighting}
-\end{Shaded}
+vemos que el objeto \texttt{mass} que hemos creado antes al extraer la
+variable \texttt{body\_mass\_g} es de un nuevo tipo, llamado
+\texttt{Series}.
 
-\begin{verbatim}
-Index(['Adelie', 'Gentoo', 'Chinstrap'], dtype='object', name='species')
-\end{verbatim}
+\texttt{Series} es el tipo de datos que usa \texttt{pandas} para
+almacenar vectores unidimensionales, representando un conjunto de
+observaciones de una variable.
 
-\begin{exercise}[]% 
-\protect\hypertarget{exr-1categorial-sex-counts}{}\label{exr-1categorial-sex-counts}%
-Determina el número total de hembras y de machos. Almacena el resultado
-en una variable de nombre \texttt{sex\_counts}.
-
-\end{exercise}
-
-Tabla de frecuencias relativas (proporciones):
+Podemos usar el método \texttt{head()} para ver los cinco primeros
+valores de la variable:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{species\_props }\OperatorTok{=}\NormalTok{ penguins.value\_counts(}
-\NormalTok{    subset}\OperatorTok{=}\StringTok{"species"}\NormalTok{,}
-\NormalTok{    normalize}\OperatorTok{=}\VariableTok{True}
-\NormalTok{)}
-\NormalTok{species\_props}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-C:\Users\Usuario\AppData\Local\Programs\Python\Python310\lib\site-packages\IPython\core\formatters.py:343: FutureWarning:
-
-In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-\end{verbatim}
-
-\begin{tabular}{lr}
-\toprule
-{} &         0 \\
-species   &           \\
-\midrule
-Adelie    &  0.441860 \\
-Gentoo    &  0.360465 \\
-Chinstrap &  0.197674 \\
-\bottomrule
-\end{tabular}
-
-Tabla de porcentajes:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{100}\OperatorTok{*}\NormalTok{species\_props}
+\NormalTok{mass.head(}\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{tabular}{lr}
 \toprule
-{} &          0 \\
-species   &            \\
+{} &  body\_mass\_g \\
 \midrule
-Adelie    &  44.186047 \\
-Gentoo    &  36.046512 \\
-Chinstrap &  19.767442 \\
+0 &       3750.0 \\
+1 &       3800.0 \\
+2 &       3250.0 \\
+3 &          NaN \\
+4 &       3450.0 \\
 \bottomrule
 \end{tabular}
 
-\hypertarget{diagrama-de-barras-con-pandas}{%
-\subsection{\texorpdfstring{Diagrama de barras con
-\texttt{pandas}}{Diagrama de barras con pandas}}\label{diagrama-de-barras-con-pandas}}
+Aprecia que \texttt{mass} tiene el mismo índice que la hoja de datos
+\texttt{penguins}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{species\_counts.plot.bar()}\OperatorTok{;}
+\NormalTok{mass.index}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[tbph]
+\begin{verbatim}
+RangeIndex(start=0, stop=344, step=1)
+\end{verbatim}
 
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-10-output-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{species\_counts.plot.barh()}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-11-output-1.pdf}
-
-}
-
-\end{figure}
+Podemos ver una hoja de datos (\texttt{DataFrame}) como un conjunto de
+variables (\texttt{Series}), dispuestas en columnas, que comparten un
+índice común.
 
 \begin{exercise}[]% 
-\protect\hypertarget{exr-1categorial-pd-sex-bar}{}\label{exr-1categorial-pd-sex-bar}%
-Usa la variable \texttt{sex\_counts} creada en el
-\exrref{exr-1categorial-sex-counts} para crear un diagrama de
-barras mostrando el número total de hembras y de machos.
+\protect\hypertarget{exr-series}{}\label{exr-series}%
+Averigua si los siguientes objetos son de tipo \texttt{Series} o
+\texttt{DataFrame}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{penguins{[}"flipper\_length\_mm"{]}}
+\item
+  \texttt{penguins{[}{[}"flipper\_length\_mm"{]}{]}}
+\end{enumerate}
 
 \end{exercise}
 
+Generalmente al aplicar un método propio de la clase \texttt{Series} a
+un objeto de clase \texttt{DataFrame}, se obtiene el mismo resultado que
+si se aplicara el método a cada una de las variables de la hoja de
+datos. Como hicimos antes al calcular simultáneamente la media de las
+dos variables en la hoja de datos \texttt{bill} con
+\texttt{bill.mean()}.
+
+Pero hay métodos propios de \texttt{Series} que no pueden aplicarse a
+\texttt{DataFrame}, métodos propios de \texttt{DataFrame} que no pueden
+aplicarse a \texttt{Series}, y métodos comunes a \texttt{Series} y
+\texttt{DataFrame} pero que requieren diferentes argumentos en cada
+caso. Por ejemplo, el método \texttt{Series.sort\_values()} ordena los
+valores de una variable de mayor a menor. Puedes comprobarlo con
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mass.sort\_values().head(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{lr}
+\toprule
+{} &  body\_mass\_g \\
+\midrule
+190 &       2700.0 \\
+64  &       2850.0 \\
+58  &       2850.0 \\
+116 &       2900.0 \\
+98  &       2900.0 \\
+\bottomrule
+\end{tabular}
+
+Sin embargo el método \texttt{DataFrame.sort\_values()} no puede
+aplicarse sin argumentos.
+
 \begin{exercise}[]% 
-\protect\hypertarget{exr-1categorial-pd-island}{}\label{exr-1categorial-pd-island}%
-Determina cuántos pingüinos hay en cada isla y dibuja un diagrama de
-barras con los resultados.
+\protect\hypertarget{exr-sort_values}{}\label{exr-sort_values}%
+Verifica que al ejecutar \texttt{bill.sort\_values()} se obtiene un
+error e intenta interpretarlo y corregirlo.
 
 \end{exercise}
 
-\hypertarget{diagrama-de-barras-con-seaborn}{%
-\subsection{\texorpdfstring{Diagrama de barras con
-\texttt{seaborn}}{Diagrama de barras con seaborn}}\label{diagrama-de-barras-con-seaborn}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sns.barplot(x}\OperatorTok{=}\NormalTok{species\_counts.index, y}\OperatorTok{=}\NormalTok{species\_counts)}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-12-output-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sns.countplot(data}\OperatorTok{=}\NormalTok{penguins, x}\OperatorTok{=}\StringTok{"species"}\NormalTok{)}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-13-output-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sns.countplot(data}\OperatorTok{=}\NormalTok{penguins, x}\OperatorTok{=}\StringTok{"species"}\NormalTok{, order }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Chinstrap\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Adelie\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Gentoo\textquotesingle{}}\NormalTok{])}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-14-output-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sns.countplot(data}\OperatorTok{=}\NormalTok{penguins, x}\OperatorTok{=}\StringTok{"species"}\NormalTok{, order }\OperatorTok{=}\NormalTok{ species\_counts.index)}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-15-output-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sns.countplot(data}\OperatorTok{=}\NormalTok{penguins, y}\OperatorTok{=}\StringTok{"species"}\NormalTok{)}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-16-output-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{exercise}[]% 
-\protect\hypertarget{exr-1categorial-sns-countplot}{}\label{exr-1categorial-sns-countplot}%
-Utiliza la función \VERB|\NormalTok{countplot()}| de la librería
-\VERB|\NormalTok{seaborn}| para crear diagramas de barras para
-
-\begin{itemize}
-\tightlist
-\item
-  el número de hembras y machos
-\item
-  el número de pingüinos en cada isla
-\end{itemize}
-
-sin crear previamente tablas de recuentos.
-
-\end{exercise}
-
-\hypertarget{personalizaciuxf3n-de-los-gruxe1ficos}{%
-\subsubsection{Personalización de los
-gráficos}\label{personalizaciuxf3n-de-los-gruxe1ficos}}
-
-No es difícil personalizar los gráficos indicando títulos y colores
-\footnote{Puedes ver los colores disponibles
-  \href{https://matplotlib.org/stable/tutorials/colors/colors.html}{aquí}.}.
-Por ejemplo:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sns.countplot(data}\OperatorTok{=}\NormalTok{penguins, x}\OperatorTok{=}\StringTok{"species"}\NormalTok{, color}\OperatorTok{=}\StringTok{"steelblue"}\NormalTok{)}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-17-output-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sns.countplot(data}\OperatorTok{=}\NormalTok{penguins, x}\OperatorTok{=}\StringTok{"species"}\NormalTok{, palette}\OperatorTok{=}\NormalTok{[}\StringTok{"steelblue"}\NormalTok{, }\StringTok{"coral"}\NormalTok{, }\StringTok{"gold"}\NormalTok{])}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-18-output-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ax }\OperatorTok{=}\NormalTok{ sns.countplot(data}\OperatorTok{=}\NormalTok{penguins, x}\OperatorTok{=}\StringTok{"species"}\NormalTok{, palette}\OperatorTok{=}\StringTok{"pastel"}\NormalTok{)}
-\NormalTok{ax.}\BuiltInTok{set}\NormalTok{(}
-\NormalTok{    title}\OperatorTok{=}\StringTok{"Número de pingüinos de cada especie"}\NormalTok{,}
-\NormalTok{    xlabel}\OperatorTok{=}\StringTok{"Especie"}\NormalTok{, }
-\NormalTok{    ylabel}\OperatorTok{=}\StringTok{"Número de pingüinos"}
-\NormalTok{)}\OperatorTok{;}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[tbph]
-
-{\centering \includegraphics{chapters/1categorical_files/figure-pdf/cell-19-output-1.pdf}
-
-}
-
-\end{figure}
-
-La personalización de los gráficos no carece de importancia, siendo
-especialmente relevante dar títulos descriptivos a los ejes. No
-obstante, en esta práctica nos centraremos en los procedimientos para
-realizar los gráficos y en la mayoría de ocasiones omitiremos los
-detalles de personalización de los mismos, que pueden consultarse en la
-documentación de las librerías usadas.
-
 \bookmarksetup{startatroot}
 
-\hypertarget{una-variable-numuxe9rica}{%
-\section{Una variable numérica}\label{una-variable-numuxe9rica}}
-
-\hypertarget{el-muxe9todo-describe-1}{%
-\subsection{\texorpdfstring{El método
-\texttt{describe()}}{El método describe()}}\label{el-muxe9todo-describe-1}}
-
-\hypertarget{histograma}{%
-\subsection{Histograma}\label{histograma}}
-
-\begin{itemize}
-\tightlist
-\item[$\square$]
-  Están \texttt{Dataframe.plot.hist()} y \texttt{Dataframe.hist()}
-\end{itemize}
-
-\hypertarget{diagrama-de-caja-y-bigotes}{%
-\subsection{Diagrama de caja y
-bigotes}\label{diagrama-de-caja-y-bigotes}}
-
-\begin{itemize}
-\tightlist
-\item[$\square$]
-  Están \texttt{Dataframe.plot.box()} y \texttt{Dataframe.boxplot()}
-\end{itemize}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{agrupaciuxf3n-de-hojas-de-datos}{%
-\section{Agrupación de hojas de
-datos}\label{agrupaciuxf3n-de-hojas-de-datos}}
-
-\begin{itemize}
-\tightlist
-\item[$\square$]
-  Habiendo descubierto el argumento \texttt{subset} de
-  \texttt{value\_counts()} y el método \texttt{unstack()} (ver en mis
-  apuntes de pandas
-  \texttt{Gráficos\ \textgreater{}\ Diagramas\ de\ barras\ \textgreater{}\ Dos\ variables}
-  y
-  \texttt{Gráficos\ \textgreater{}\ Diagramas\ de\ barras\ \textgreater{}\ Tres\ variables})
-  puede que esta sección no haga falta hasta analizar variable numérica
-  por categorías.
-\end{itemize}
-
-\begin{itemize}
-\tightlist
-\item
-  Split
-\item
-  Apply
-\item
-  Combine
-\end{itemize}
-
-Un ejemplo sencillo como aplicar \texttt{sum()}.
-
-O también tamaño muestral:
-
-\begin{verbatim}
-df.groupby("grade3").size()
-\end{verbatim}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{dos-variables-categuxf3ricas}{%
-\section{Dos variables categóricas}\label{dos-variables-categuxf3ricas}}
-
-\begin{itemize}
-\tightlist
-\item[$\square$]
-  Ver lo que tengo explorado en mi manual de pandas en apartados
-  \texttt{Gráficos\ \textgreater{}\ Diagramas\ de\ barras\ \textgreater{}\ Dos\ variables}
-  y
-  \texttt{Gráficos\ \textgreater{}\ Diagramas\ de\ barras\ \textgreater{}\ Tres\ variables}.
-\end{itemize}
-
-\hypertarget{tablas-de-frecuencias}{%
-\subsection{Tablas de frecuencias}\label{tablas-de-frecuencias}}
-
-\hypertarget{tablas-de-contingencia}{%
-\subsection{Tablas de contingencia}\label{tablas-de-contingencia}}
-
-\begin{verbatim}
-pd.crosstab(df2["factor1"], df2["factor2"])
-\end{verbatim}
-
-\begin{verbatim}
-pd.crosstab(
-    df2["factor1"], 
-    [df2["factor2"], df2["factor3"]]
-)
-\end{verbatim}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{variable-numuxe9rica-por-categoruxedas}{%
-\section{Variable numérica por
-categorías}\label{variable-numuxe9rica-por-categoruxedas}}
+\hypertarget{continuaruxe1}{%
+\section{Continuará \ldots{}}\label{continuaruxe1}}
 
 \bookmarksetup{startatroot}
 
