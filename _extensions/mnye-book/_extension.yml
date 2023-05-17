@@ -18,6 +18,7 @@ contributes:
           - post-render/pdf/clean_tex_aux_files.py
     book:
       reader-mode: true
+      back-to-top-navigation: true
       # downloads: [pdf] # Aquí no tiene efecto. Tiene que ir en _quarto.yml
       repo-actions: [source]  
       repo-branch: master

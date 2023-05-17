@@ -16,9 +16,9 @@ book:
     - chapters/data.qmd
     # - chapters/subset.qmd
     - chapters/subset-variables.qmd
-    - chapters/tbc.qmd
-    # - chapters/1categorical.qmd
-    # - chapters/1numerical.qmd
+    - chapters/1categorical.qmd
+    - chapters/1numerical.qmd
+    - chapters/tbc.qmd    
     # - chapters/groupby.qmd
     # - chapters/2categorical.qmd
     # - chapters/numerical_by_categorical.qmd

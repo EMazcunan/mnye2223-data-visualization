@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/tbc.html" rel="next">
+<link href="../chapters/1categorical.html" rel="next">
 <link href="../chapters/data.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -201,8 +201,20 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/1categorical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Una variable categórica</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/1numerical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Una variable numérica</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/tbc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Continuará …</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Continuará …</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -227,7 +239,6 @@ div.csl-indent {
   <ul>
   <li><a href="#seleccionar-una-variable" id="toc-seleccionar-una-variable" class="nav-link active" data-scroll-target="#seleccionar-una-variable"><span class="header-section-number">3.1</span> Seleccionar una variable</a></li>
   <li><a href="#seleccionar-una-lista-de-variables" id="toc-seleccionar-una-lista-de-variables" class="nav-link" data-scroll-target="#seleccionar-una-lista-de-variables"><span class="header-section-number">3.2</span> Seleccionar una lista de variables</a></li>
-  <li><a href="#dataframe-vs-series" id="toc-dataframe-vs-series" class="nav-link" data-scroll-target="#dataframe-vs-series"><span class="header-section-number">3.3</span> <code>DataFrame</code> vs <code>Series</code></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EMazcunan/mnye2223-data-visualization/blob/master/chapters/subset-variables.qmd" class="toc-action">Ver el código</a></p></div></div></nav>
     </div>
@@ -348,13 +359,14 @@ backToTopButton.addEventListener("click", function () {
 index = mass.argmax()
 penguins.loc[index]
 ``` -->
-<p>Podemos realizar las dos operaciones, seleccionar la variable <code>body_mass_g</code>, y calcular su máximo con una sola instrucción:</p>
+<p>Podemos realizar las dos operaciones anteriores, seleccionar la variable <code>body_mass_g</code>, y calcular su máximo con una sola instrucción:</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">"body_mass_g"</span>].<span class="bu">max</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>6300.0</code></pre>
 </div>
 </div>
+<p>Obtenemos el mismo resultado de antes.</p>
 <div id="exr-subset-variable-1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.1 </strong></span>Calcula el peso medio de todos los pingüinos (función <code>mean()</code>).</p>
 </div>
@@ -387,73 +399,126 @@ bill_depth_mm     17.15117
 dtype: float64</code></pre>
 </div>
 </div>
+<p>Vemos que los picos de los pingüinos tiene una longitud media de <span class="math inline">\(43.92\)</span> milímetros y una anchura media de <span class="math inline">\(17.15\)</span> milímetros.</p>
 <div id="exr-subset-variables-3" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.3 </strong></span>Calcula el número de observaciones no nulas (función <code>count()</code>) para las variables <code>species</code> y <code>body_mass_g</code> con una sola línea de código.</p>
 </div>
-</section>
-<section id="dataframe-vs-series" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="dataframe-vs-series"><span class="header-section-number">3.3</span> <code>DataFrame</code> vs <code>Series</code></h2>
-<p>Ejecutando</p>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(bill)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>pandas.core.frame.DataFrame</code></pre>
-</div>
-</div>
-<p>vemos que el objeto <code>bill</code> que hemos creado antes al extraer las dos variables sobre las dimensiones del pico es de tipo <code>DataFrame</code>, igual que la hoja de datos original <code>penguins</code>.</p>
-<p>Pero ejecutando</p>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(mass)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>pandas.core.series.Series</code></pre>
-</div>
-</div>
-<p>vemos que el objeto <code>mass</code> que hemos creado antes al extraer la variable <code>body_mass_g</code> es de un nuevo tipo, llamado <code>Series</code>.</p>
-<p><code>Series</code> es el tipo de datos que usa <code>pandas</code> para almacenar vectores unidimensionales, representando un conjunto de observaciones de una variable.</p>
-<p>Podemos usar el método <code>head()</code> para ver los cinco primeros valores de la variable:</p>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mass.head(<span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>0    3750.0
+<!-- 
+## `DataFrame` vs `Series` 
+
+Ejecutando 
+
+::: {.cell execution_count=8}
+``` {.python .cell-code}
+type(bill)
+```
+
+::: {.cell-output .cell-output-display execution_count=8}
+```
+pandas.core.frame.DataFrame
+```
+:::
+:::
+
+
+vemos que el objeto `bill` que hemos creado antes al extraer las dos variables sobre las dimensiones del pico es de tipo `DataFrame`, igual que la hoja de datos original `penguins`.
+
+
+Pero ejecutando 
+
+::: {.cell execution_count=9}
+``` {.python .cell-code}
+type(mass)
+```
+
+::: {.cell-output .cell-output-display execution_count=9}
+```
+pandas.core.series.Series
+```
+:::
+:::
+
+
+vemos que el objeto `mass` que hemos creado antes al extraer la variable `body_mass_g` es de un nuevo tipo, llamado `Series`. 
+
+`Series` es el tipo de datos que usa `pandas` para almacenar vectores unidimensionales, representando un conjunto de observaciones de una variable. 
+
+Podemos usar el método `head()` para ver los cinco primeros valores de la variable:
+
+::: {.cell execution_count=10}
+``` {.python .cell-code}
+mass.head(5)
+```
+
+::: {.cell-output .cell-output-display execution_count=10}
+```
+0    3750.0
 1    3800.0
 2    3250.0
 3       NaN
 4    3450.0
-Name: body_mass_g, dtype: float64</code></pre>
-</div>
-</div>
-<p>Aprecia que <code>mass</code> tiene el mismo índice que la hoja de datos <code>penguins</code>:</p>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mass.index</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>RangeIndex(start=0, stop=344, step=1)</code></pre>
-</div>
-</div>
-<p>Podemos ver una hoja de datos (<code>DataFrame</code>) como un conjunto de variables (<code>Series</code>), dispuestas en columnas, que comparten un índice común.</p>
-<div id="exr-series" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 3.4 </strong></span>Averigua si los siguientes objetos son de tipo <code>Series</code> o <code>DataFrame</code>:</p>
-<ol type="1">
-<li><p><code>penguins["flipper_length_mm"]</code></p></li>
-<li><p><code>penguins[["flipper_length_mm"]]</code></p></li>
-</ol>
-</div>
-<p>Generalmente al aplicar un método propio de la clase <code>Series</code> a un objeto de clase <code>DataFrame</code>, se obtiene el mismo resultado que si se aplicara el método a cada una de las variables de la hoja de datos. Como hicimos antes al calcular simultáneamente la media de las dos variables en la hoja de datos <code>bill</code> con <code>bill.mean()</code>.</p>
-<p>Pero hay métodos propios de <code>Series</code> que no pueden aplicarse a <code>DataFrame</code>, métodos propios de <code>DataFrame</code> que no pueden aplicarse a <code>Series</code>, y métodos comunes a <code>Series</code> y <code>DataFrame</code> pero que requieren diferentes argumentos en cada caso. Por ejemplo, el método <code>Series.sort_values()</code> ordena los valores de una variable de mayor a menor. Puedes comprobarlo con</p>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mass.sort_values().head(<span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>190    2700.0
+Name: body_mass_g, dtype: float64
+```
+:::
+:::
+
+
+Aprecia que `mass` tiene el mismo índice que la hoja de datos `penguins`:
+
+::: {.cell execution_count=11}
+``` {.python .cell-code}
+mass.index
+```
+
+::: {.cell-output .cell-output-display execution_count=11}
+```
+RangeIndex(start=0, stop=344, step=1)
+```
+:::
+:::
+
+
+Podemos ver una hoja de datos (`DataFrame`) como un conjunto de variables (`Series`), dispuestas en columnas,  que comparten un índice común.
+
+::: {#exr-series}
+Averigua si los siguientes objetos son de tipo `Series` o `DataFrame`:
+
+1. `penguins["flipper_length_mm"]`
+
+2. `penguins[["flipper_length_mm"]]`
+:::
+
+Generalmente al aplicar un método propio de la clase `Series` a un objeto de clase `DataFrame`, se obtiene el mismo resultado que si se aplicara el método a cada una de las variables de la hoja de datos. Como hicimos antes al calcular simultáneamente la media de las dos variables en la hoja de datos `bill` con `bill.mean()`. 
+
+
+Pero hay métodos propios de `Series` que no pueden aplicarse a `DataFrame`, métodos propios de `DataFrame` que no pueden aplicarse a `Series`, y métodos comunes a `Series` y `DataFrame` pero que requieren diferentes argumentos en cada caso. Por ejemplo, el método `Series.sort_values()` ordena los valores de una variable de mayor a menor. Puedes comprobarlo con
+
+::: {.cell execution_count=12}
+``` {.python .cell-code}
+mass.sort_values().head(5)
+```
+
+::: {.cell-output .cell-output-display execution_count=12}
+```
+190    2700.0
 64     2850.0
 58     2850.0
 116    2900.0
 98     2900.0
-Name: body_mass_g, dtype: float64</code></pre>
-</div>
-</div>
-<p>Sin embargo el método <code>DataFrame.sort_values()</code> no puede aplicarse sin argumentos.</p>
-<div id="exr-sort_values" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 3.5 </strong></span>Verifica que al ejecutar <code>bill.sort_values()</code> se obtiene un error e intenta interpretarlo y corregirlo.</p>
-</div>
+Name: body_mass_g, dtype: float64
+```
+:::
+:::
+
+
+Sin embargo  el método `DataFrame.sort_values()` no puede aplicarse sin argumentos. 
+
+::: {#exr-sort_values}
+Verifica que al ejecutar `bill.sort_values()` se obtiene un error e intenta interpretarlo y corregirlo. 
+:::
+
+
+ -->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -839,8 +904,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/tbc.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Continuará …</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/1categorical.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Una variable categórica</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

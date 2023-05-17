@@ -51,11 +51,13 @@ index = mass.argmax()
 penguins.loc[index]
 ``` -->
 
-Podemos realizar las dos operaciones, seleccionar la variable `body_mass_g`, y calcular su máximo  con una sola instrucción:
+Podemos realizar las dos operaciones anteriores, seleccionar la variable `body_mass_g`, y calcular su máximo  con una sola instrucción:
 
 ```{python}
 penguins["body_mass_g"].max()
 ```
+Obtenemos el mismo resultado de antes.
+
 
 ::: {#exr-subset-variable-1}
 Calcula  el peso medio  de todos los pingüinos (función `mean()`).
@@ -84,11 +86,13 @@ Ahora podemos calcular la media para ambas variables con
 bill.mean()
 ```
 
+Vemos que los picos de los pingüinos tiene una longitud media de  $43.92$ milímetros y una anchura media de $17.15$ milímetros.
+
 ::: {#exr-subset-variables-3}
 Calcula el número de observaciones no nulas (función `count()`) para las variables `species` y `body_mass_g` con una sola línea de código.
 :::
 
-
+<!-- 
 ## `DataFrame` vs `Series` 
 
 Ejecutando 
@@ -144,4 +148,4 @@ Verifica que al ejecutar `bill.sort_values()` se obtiene un error e intenta inte
 :::
 
 
-
+ -->
