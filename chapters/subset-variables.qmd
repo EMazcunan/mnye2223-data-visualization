@@ -1,5 +1,4 @@
 ---
-title: Seleccionar variables
 # editor:
 #     render-on-save: true
 ---
@@ -18,6 +17,9 @@ url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.cs
 penguins = pd.read_csv(url)
 ```
 
+
+# Seleccionar variables {#sec-subset-variables}
+
 Al estudiar un conjunto de datos, es frecuente tener que seleccionar los datos relevantes para responder a las diferentes cuestiones planteadas. 
 
 
@@ -26,7 +28,7 @@ Si por ejemplo queremos saber cuál es el peso máximo de todos los pingüinos d
 En esta sección aprenderás los métodos para seleccionar variables de una hoja de datos.
 
 
-## Seleccionar una variable
+## Seleccionar una variable {#sec-subset-one-variable}
 
 Utiliza la siguiente instrucción para seleccionar la variable `body_mass_g`:
 ```{python}
@@ -68,7 +70,7 @@ Calcula el valor mínimo para la longitud de las alas de todos los pingüinos (f
 :::
 
 
-## Seleccionar una lista de variables
+## Seleccionar una lista de variables {#sec-subset-several-variables}
 
 Para seleccionar las dos variables relativas a las dimensiones del pico, `bill_length_mm` y  `bill_depth_mm`, ejecuta la siguiente instrucción:
 

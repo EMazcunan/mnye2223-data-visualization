@@ -18,11 +18,10 @@ book:
     - chapters/subset-variables.qmd
     - chapters/1categorical.qmd
     - chapters/1numerical.qmd
-    - chapters/tbc.qmd    
-    # - chapters/groupby.qmd
+    - chapters/groupby.qmd
+    - chapters/numerical_by_categorical.qmd
+    # - chapters/tbc.qmd    
     # - chapters/2categorical.qmd
-    # - chapters/numerical_by_categorical.qmd
-    # - chapters/problems.qmd
     - chapters/references.qmd
   repo-url: https://github.com/EMazcunan/mnye2223-data-visualization
   # issue-url:  
@@ -63,10 +62,11 @@ fig-align: center # no tiene efecto sin caption
 
 execute:
   warning: false
+  freeze: true
 
 format:
-  mnye-book-html: 
-    css: html/styles.css 
+  # mnye-book-html: 
+  #   css: html/styles.css 
   mnye-book-pdf: 
     include-in-header: 
       - pdf/preamble.tex

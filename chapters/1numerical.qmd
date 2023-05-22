@@ -1,9 +1,10 @@
 ---
-title: Una variable numérica
 editor:
     render-on-save: true
 ---
 
+
+# Una variable numérica {#sec-1numerical}
 ```{python}
 #| include: false
 import warnings
@@ -26,7 +27,7 @@ Empezamos seleccionando la variable de interés y almacenando el resultado en un
 mass = penguins["body_mass_g"]
 ```
 
-## El método `describe()`
+## El método `describe()` {#sec-1numerical-describe}
 
 El método `describe()` que usamos en la sección anterior para una variable categórica, también puede aplicarse a variables numéricas. 
 
@@ -38,7 +39,7 @@ mass.describe()
 
 La información que obtenemos de la salida anterior sobre la distribución del peso de los pingüinos es la siguiente:
 
-Frragmento de la salida | Significado
+Fragmento de la salida | Significado
 ----- | ------
 `count     342.000000` | Hay 342 valores no nulos, así que no se conoce el peso de dos pingüinos.
 `mean     4201.754386` | El peso medio de los pingüinos es $4$ kilogramos y $201$ gramos.
@@ -67,7 +68,7 @@ mass_sorted[255:265]
 ```  -->
 
 
-## Histograma
+## Histograma {#sec-1numerical-histogram}
 
 <!-- - [ ] En `pandas` están `Dataframe.plot.hist()` y `Dataframe.hist()` -->
 
@@ -130,7 +131,7 @@ Si llegas el primero a este punto de la práctica, avísame para que explique el
 
 
 ::: {.callout-note}
-Para realizar un diagrama de caja y bigotes usa la función `histplot()` del paquete `seaborn` e indica:
+Para realizar un diagrama de caja y bigotes usa la función `boxplot()` del paquete `seaborn` e indica:
 
 - El nombre de la hoja de datos como valor del argumento `data`.
 - El nombre de la variable como valor del argumento `y`.

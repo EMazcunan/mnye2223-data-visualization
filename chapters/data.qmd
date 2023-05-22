@@ -47,7 +47,7 @@ penguins.shape
 ```
 Vemos que nuestra hoja de datos tiene `344` filas y `7` columnas.
 
-## Primeras y últimas filas
+## Primeras y últimas filas {#sec-head-tail}
 
 Con las siguientes instrucciones puedes visualizar las cinco primeras y últimas filas de la hoja de datos `penguins` que acabas de crear.
 

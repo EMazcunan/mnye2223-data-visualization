@@ -1,0 +1,133 @@
+# Agrupar por categorías {#sec-groupby}
+
+```{python}
+#| include: false
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+import pandas as pd
+import seaborn as sns
+
+url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv"
+penguins = pd.read_csv(url)
+```
+
+En la @sec-head-tail visualizamos los datos de los cinco primeros pingüinos con la instrucción
+
+```{.python}
+penguins.head(5)
+```
+
+Y en la @sec-subset-one-variable calculamos el peso máximo de todos los pingüinos con la orden
+
+```{.python}
+penguins["body_mass_g"].max()
+```
+
+Ahora nos planteamos realizar las operaciones anteriores, pero para cada especie de pingüinos (Adelie, Chinstrap y Gentoo), es decir, queremos:
+
+- Ver los datos de los primeros pingüinos de cada una de las tres especies.
+- Calcular el peso máximo en cada una de las tres especies de pingüinos.
+
+`pandas` proporciona el método `groupby()` para resolver este tipo de problemas.
+
+El método `groupby()` divide una hoja de datos en los grupos o categorías definidos por una variable categórica (en nuestro caso las tres especies dadas por la variable `species`), de forma que al realizar una operación (como `head()` o `máx()`)  en la hoja de  datos por grupos, obtendremos el resultado de la operación en cada uno de los grupos (en nuestro caso en cada especie). 
+
+![Ilustración del método `groupby()` en el manual de `pandas`](../img/06_groupby.svg)
+
+
+## Ejemplo 1: Primeras filas de cada especie {.unnumbered}
+
+Para ver los datos de los tres primeros pingüinos de cada especie, ejecuta la instrucción siguiente:
+```{python}
+penguins.groupby("species").head(3)
+```
+
+Observa que en la salida anterior se muestran:
+
+- las filas de índices $0$, $1$ y $2$ correspondientes a los tres primeros pingüinos de la especie Adelie
+- las filas de índices $152$, $153$ y $154$ correspondientes a los tres primeros pingüinos de la especie Chinstrap
+- y las filasde índices $220$, $221$ y $222$ correspondientes a los tres primeros pingüinos de la especie Gentoo.
+
+Analicemos, paso por paso, lo que ocurre al ejecutar la instrucción `penguins.groupby("species").head(3)`:
+
+1. `penguins.groupby("species")` parte la hoja de datos `penguins` en tres grupos correspondientes a las tres especies. Esta operación devuelve un objeto de un nuevo tipo llamado `DataFrameGroupBy`:
+   ```{python}
+   type(penguins.groupby("species"))
+   ```
+
+   Puedes pensar que después de aplicar `groupby()` tenemos los datos virtualmente divididos en tres hojas de datos: 
+   - una hoja de datos con las $152$ filas de los pingüinos de la especie Adelie
+   - otra con las $68$ filas de los pingüinos de la especie Chinstrap 
+   - y una tercera con las $124$ filas de los pingüinos de la especie Gentoo. 
+
+2. Al aplicar `head(3)` sobre la hoja de datos agrupada creada con `penguins.groupby("species")`, el efecto es que se aplica `head(3)` en cada uno de los tres grupos (como si se aplicara en cada una de las tres hojas de datos virtuales que ha creado `groupby()` a partir de `penguins`). 
+
+   La salida que hemos obtenenido es la combinación de los tres resultados en los tres grupos. 
+
+
+## Ejemplo 2: Peso máximo de cada especie {.unnumbered}
+
+Para obtener el peso máximo de cada especie ejecuta
+
+```{python}
+penguins[["species", "body_mass_g"]].groupby("species").max()
+```
+
+Vemos que:
+
+- el peso máximo entre los pingüinos de la especie Adelie es de $4$ kg y $775$ gramos.
+- el peso máximo entre los pingüinos de la especie Chinstrap es de $4$ kg y $800$ gramos.
+- el peso máximo entre los pingüinos de la especie Gentto (y entre todos los pingüinos) es de $6$ kg y $300$ gramos.
+
+
+Analicemos la instrucción anterior paso por paso:
+
+1. Como nos interesa el peso máximo por especie, primero hemos escrito `penguins[["species", "body_mass_g"]]`, para seleccionar las dos variables asociadas a las características de interés, `species` y `body_mass_g`, conforme aprendimos en la @sec-subset-several-variables.
+
+2. Después `groupby("species")` divide la selección de la hoja de datos del paso anterior en tres grupos para cada especie.
+
+3. `max()` aplicada a la hoja de datos por grupos (de tipo `DataFrameGroupBy`) creada en el paso anterior, calcula el máximo en cada uno de los grupos para cada especie. 
+
+   La salida que hemos obtenido es una tabla con los tres pesos máximos. 
+
+***
+
+En las hojas de datos agrupadas por categorías (objetos de tipo `DataFrameGroupBy`) también funcionan los mecanismos de selección de variables usando corchetes `[]`. Así, una forma equivalente de calcular el peso máximo de cada especie sería:
+
+```{python}
+penguins.groupby("species")["body_mass_g"].max()
+```
+
+Los pasos seguidos en esta segunda variante serían:
+ 
+1. `groupby("species")` crea los tres grupos o categorías definidos por la variable `species`.
+
+2. `["body_mass_g"]` selecciona la variable con el peso de los pingüinos en cada grupo.
+
+3. `max()` calcula el máximo en cada grupo.
+
+## Ejemplo 3: Recuento del número de pingüinos de cada especie {.unnumbered}
+
+El método `value_counts()` que usamos en la @sec-value-counts para obtener una tabla de recuentos del número de pingüinos de cada especie es en el fondo la combinación de una operación de agrupación y la aplicación del método `count()`. De hecho es equivalente a 
+
+```{python}
+penguins.groupby("species")["species"].count()
+```
+
+::: {#exr-groupby-mean}
+Combina los métodos `groupby()` y `mean()` para calcular el peso medio de los pingüinos que viven en cada isla.
+:::
+
+::: {#exr-groupby-max}
+Combina los métodos `groupby()` y `median()` para calcular la mediana de la longitud del pico de las hembras y de los machos.
+:::
+
+::: {#exr-groupby-value_counts}
+Combina los métodos `groupby()` y `value_counts()` para calcular cuántos pingüinos de cada especie viven en cada isla.
+
+Analiza el resultado para responder a las siguientes preguntas:
+
+- ¿cuál es la única especie de pingüinos presente en las tres islas?
+- ¿en qué islas viven los pingüinos de la especie Chinstrap?
+- ¿qué especies de pingüinos hay en la isla Biscoe?
+:::

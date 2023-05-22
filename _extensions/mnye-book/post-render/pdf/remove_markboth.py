@@ -9,7 +9,7 @@ import utils
 def to_remove(line):
     result = False
     to_remove_keys = [
-      "\\markboth"
+      "\\markboth", "\\markright"
     ]
     for key in to_remove_keys:
       if key in line:

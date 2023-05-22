@@ -32,11 +32,15 @@ section#sec-preface h1, section#sec-preface h2 {
 #title-block-header div.subject-info p {
     margin-bottom: 0.2rem
 }
-.quarto-cover-image{
+.quarto-cover-image {
     max-width: 100%;
     float: none;
     margin-left: auto;
     margin-right: auto;
+}
+
+.quarto-dark code {
+    color: gold;
 }
 
 // // Sidebar (chapters)

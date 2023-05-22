@@ -33,6 +33,9 @@ contributes:
         border: true
     lang: es
 
+    language: 
+      crossref-ch-prefix: Sección
+
     toc: true
 
     bibliography: references.bib
@@ -45,8 +48,6 @@ contributes:
       fig-title: "Figura"
       tbl-prefix: "Tabla" 
       tbl-title: "Tabla"
-      sec-prefix: "Sección"
-      sec-title: "Sección"
       thm-prefix: "Teorema"
       thm-title: "Teorema"
       def-prefix: "Definición"
@@ -55,6 +56,8 @@ contributes:
       exr-title: "Ejercicio"
       exm-prefix: "Ejemplo"
       exm-title: "Ejemplo"
+    
+
 
   format:
     html:

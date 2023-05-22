@@ -1,0 +1,150 @@
+---
+editor:
+    render-on-save: true
+---
+
+# Una variable numérica por categorías
+
+```{python}
+#| include: false
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+import pandas as pd
+import seaborn as sns
+# import matplotlib.pyplot as plt
+
+url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv"
+penguins = pd.read_csv(url)
+```
+
+En la @sec-1numerical estudiamos la distribución del peso de todos los pingüinos del estudio. Ahora estudiaremos si hay diferencias en la distribución del peso dependiendo de la especie.
+
+## El método `describe()` 
+
+
+El método `describe()` que usamos en la @sec-1numerical-describe para obtener un resumen de la distribución del peso de todos los pingüinos, también puede aplicarse al peso agrupado por especies:
+
+
+```{python}
+penguins.groupby("species")["body_mass_g"].describe()
+```
+
+Vemos que obtenemos una tabla con el resultado combinado de aplicar el método `describe()` en el grupo de datos correspondiente a cada una de las tres especies.
+
+Interpretamos los resultados en las columnas de rótulo `count`, `mean`, `50%` y `max`:
+
+
+Fragmento de la salida | Significado
+----- | ------
+`count` | De la @sec-1categorical-describe sabíamos que hay $152$ pingüinos de la especie Adelie, $124$ de la especie Gentoo, y $68$ de la especie Chinstrap. Y de la @sec-1numerical-describe sabíamos que se desconoce el peso de dos pingüinos. Ahora sabemos que esos dos pingüinos son uno de la especie Adelie y otro de la especie Gentoo, y que se conoce el peso de todos los pingüinos de la especie Chinstrap.
+`mean` | El peso medio de los pingüinos de la especie Gentoo es de $5$ kilogramos y $76$ gramos, superior a la media global de $4$ kilos y $201$ gramos (que conocíamos de la @sec-1numerical-describe). Y los pesos medios de las especies Adelie y  Chinstrap son inferiores a la media global y muy similares: $3$ kilos $700$ gramos, y $3$ kilos y $733$ gramos respectivamente.
+`50%` | La mediana del peso es la misma para las especies Adelie y Chinstrap, $3$ kilos y $700$ gramos, y sustancialmente más grande, $5$ kilos para la especie Gentoo.
+`max` | El pingüino de mayor peso del estudio, con $6$ kilos y $300$ gramos, es de la especie Gentoo. Mientras que el peso máximo para las especies Adelie y Chinstrap no supera los $5$ kilos ($4$ kilos y $775$ gramos y $4$ kilos y $800$ gramos respectivamente).
+
+::: {#exr-numerical_by_categorical-describe}
+Usa los métodos `groupby()` y `describe()` para responder a las siguientes preguntas:
+
+a.  Indica el peso medio de hembras y machos y compáralos con el peso medio global.
+a.  ¿Cuál es el peso máximo de las hembras?
+a.  ¿Cuál es la mediana del peso de los machos?
+a.  El pingüino de mayor peso ¿es macho o hembra?
+:::
+
+
+## Histogramas 
+
+En este apartado aprenderemos a construir diferentes histogramas para comparar la distribución del peso de las tres especies de pingüinos.
+
+### Histograma de barras apiladas
+
+Para crear un histograma del peso distinguiendo la especie mediante barras apiladas ejecuta la siguiente instrucción:
+
+```{python}
+sns.histplot(
+    data=penguins, 
+    x="body_mass_g", 
+    hue="species",
+    multiple="stack"
+);
+```
+
+Observa que la forma del diagrama es la misma que la del histograma que se realizó en la @sec-1numerical-histogram. La novedad es que cada una de las barras que representa el número de pingüinos en cada uno de los intervalos de peso se ha fragmentado en tres barras indicando la contribución de cada especie. Aprecia que conforme va aumentando el peso, va disminuyendo la contribución de las especies Adelie (azul) y Chinstrap (naranja), y aumentando la contribución de la especie Gentoo (verde).
+
+Con el argumento `hue="species"` conseguimos que los datos se dividan según las categorías de la variable `species` y se asigne un color diferente a cada categoría, que se indica en la leyenda de la esquina superior derecha del gráfico.  
+
+Y con el argumento `multiple="stack"` indicamos que las barras de cada especie se dibujen apiladas en cada intervalo.
+
+::: {.callout-note}
+Para crear un histograma de barras apiladas de una variable numérica por categorías, usa la función `histplot()` del paquete `seaborn` conforme aprendiste en la sección @sec-1numerical-histogram y además:
+
+- indica el nombre de la variable que determina las categorías como valor del parámetro `hue`.
+- usa `multiple="stack"` para que las barras de las diferentes categorías se muestren apiladas.
+::: 
+
+
+::: {#exr-histogram-stack}
+Crea un histograma de barras apiladas para el peso de los pingüinos por sexo.
+:::
+
+### Histograma de barras separadas
+
+Para crear un histograma del peso con barras separadas para cada especie ejecuta la siguiente instrucción:
+
+```{python}
+sns.histplot(
+    data=penguins,  
+    x="body_mass_g", 
+    hue="species",
+    multiple="dodge"
+);
+```
+
+En este tipo de histograma fijándonos en las barras de un solo color vemos el histograma de la especie correspondiente. 
+
+::: {.callout-note}
+Para crear un histograma de barras separadas procede de la misma forma que para crear un histograma de barras apiladas pero cambia el valor del parámetro `multiple` a `"dodge"`.
+::: 
+
+::: {#exr-histogram-stack}
+Crea un histograma de barras separadas para la longitud del pico de los pingüinos por sexo.
+:::
+
+<!-- ```{python}
+sns.histplot(data=penguins,  x="body_mass_g", hue="species",
+    # stat="count",
+    multiple="layer"
+);
+``` -->
+
+<!-- ```{python}
+sns.histplot(data=penguins, x="body_mass_g", hue="species",
+    # stat="count",
+    multiple="fill"
+);
+``` -->
+
+
+### Mosaico de histogramas
+
+
+En la __próxima sesión__ aprenderás a realizar el siguiente mosaico de histogramas (con una sola línea de código):
+
+```{python}
+#| echo: false
+grid = sns.FacetGrid(penguins, col="species")
+grid.map(sns.histplot, "body_mass_g")
+# grid.map(sns.histplot, data=penguins, x="body_mass_g") # mal, sin agrupamiento por categorías
+```
+
+
+## Diagramas de caja y bigotes
+
+En la __próxima sesión__ aprenderás a realizar el siguiente gráfico comparativo de los diagramas de caja y bigotes del peso de cada especie (es el gráfico de la portada).
+
+Repasaremos el concepto de __outliers__ para explicar los dos outliers que aparecen en la distribución del peso de los pingüinos de la especie Chinstrap.
+
+```{python}
+#| echo: false
+sns.boxplot(data=penguins, x="species", y="body_mass_g");
+```
+

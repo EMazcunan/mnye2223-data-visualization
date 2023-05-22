@@ -24,7 +24,7 @@ Comenzamos seleccionando la variable de interés en nuestra hoja de datos. Almac
 species = penguins["species"]
 ```
 
-## El método `describe()`
+## El método `describe()` {#sec-1categorical-describe}
 
 Para obtener la información más relevante sobre la distribución de las especies de pingüinos aplicamos a `species` el método `describe()`:
 
@@ -46,7 +46,7 @@ Fragmento de la salida | Significado
 Utiliza el método `describe()` para obtener información sobre la distribución de los pingüinos por islas.
 :::
 
-## Tabla de recuentos
+## Tabla de recuentos {#sec-value-counts}
 
 Ya sabemos que la especie más numerosa es Adelie, con $152$ pingüinos, pero aún no sabemos cuántos pingüinos hay de las otras dos especies, Chinstrap y Gentoo. Para obtener una tabla con el número de pingüinos de cada especie usamos la función `value_counts()`:
 
