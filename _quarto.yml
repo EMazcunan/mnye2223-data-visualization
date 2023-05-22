@@ -65,8 +65,8 @@ execute:
   freeze: true
 
 format:
-  # mnye-book-html: 
-  #   css: html/styles.css 
+  mnye-book-html: 
+    css: html/styles.css 
   mnye-book-pdf: 
     include-in-header: 
       - pdf/preamble.tex

@@ -1,0 +1,11 @@
+{
+  "hash": "728d877661dbebaec48caecd76d9a5e1",
+  "result": {
+    "markdown": "---\neditor:\n    render-on-save: true\n---\n\n\n\n# Librerías\n\nLo primero que necesitamos hacer es importar las librerías de Python que usaremos a lo largo de práctica, que son `pandas` y `seaborn`:\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\nimport pandas as pd\nimport seaborn as sns\n```\n:::\n\n\n## `pandas`\n\n![](../img/pandas){height=\"4em\" fig-align=\"center\"}\n\n`pandas` es una librería que permite leer datos almacenados en estructuras similares a una tabla, como las hojas de cálculo o los archivos CSV, y proporciona métodos para explorar y describir esos datos. \n\nUsando esta librería podremos calcular por ejemplo el peso medio de los pingüinos de cada especie. Obtendremos esta tabla:\n\n::: {.cell execution_count=3}\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\nspecies\nAdelie       3700.662252\nChinstrap    3733.088235\nGentoo       5076.016260\nName: body_mass_g, dtype: float64\n```\n:::\n:::\n\n\nPuedes consultar la documentación oficial de `pandas` [aquí](https://pandas.pydata.org/docs/index.html). <!-- Es especialmente útil su [cheatsheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf).-->\n\n## `seaborn`\n\n![](../img/seaborn){height=\"3em\" fig-align=\"center\"}\n\n`seaborn` es una librería para visualización de datos. Permite crear gráficos estadísticos muy informativos y visualmente atractivos con pocas líneas de código. Y está diseñado para trabajar con las estructuras de datos creadas con `pandas`.\n\nUsaremos `seaborn` para realizar diferentes tipos de gráficos como diagramas de barras, histogramas, diagramas de caja y bigotes etc. \n\nAprenderemos por ejemplo a crear el siguiente gráfico, con los diagramas de caja y bigotes para el peso de los pingüinos de cada especie.\n\n::: {.cell execution_count=4}\n\n::: {.cell-output .cell-output-display}\n![](libraries_files/figure-html/cell-5-output-1.png){width=602 height=429}\n:::\n:::\n\n\nPuedes consultar la documentación oficial de `seaborn` [aquí](https://seaborn.pydata.org/index.html). <!-- También hay una [cheatsheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) creada por DataCamp.-->\n\n",
+    "supporting": [
+      "libraries_files/figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
