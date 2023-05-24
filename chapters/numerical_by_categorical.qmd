@@ -126,25 +126,143 @@ sns.histplot(data=penguins, x="body_mass_g", hue="species",
 
 ### Mosaico de histogramas
 
+En los dos apartados anteriores aprendiste a crear dos tipos de histogramas para visualizar la distribución de una variable numérica distinguiendo varias categorías con colores diferentes en un mismo gráfico. Pero a veces puede resultar más útil realizar histogramas independientes para cada categoría. En este apartado aprenderás a crear, de forma simultánea, tres histogramas con la distribución del peso de los pingüinos de cada especie.  
 
-En la __próxima sesión__ aprenderás a realizar el siguiente mosaico de histogramas (con una sola línea de código):
+
+Con este fin el paquete `seaborn` proporciona la clase `FacetGrid`, que permite crear un mosaico o una malla en la que ubicar los diferentes gráficos para los datos de cada categoría. 
+
+
+Para entender cómo se usa la clase `FacetGrid` empieza ejecutando la siguiente instrucción:
+
+```{python}
+sns.FacetGrid(data=penguins, col="species")
+```
+Observa el resultado y aprecia que se han creado tres ejes de coordenadas, uno para cada especie. El efecto del argumento `col="species"` es que se ha creado una columna (`col`=_column_) para cada categoría de la variable `species`. 
+
+De momento hemos inicializado el mosaico pero aún no hemos dibujado nada en cada una de las celdas del mosaico. Para hacerlo tenemos que aplicar al mosaico el método `map()`, como en el siguiente ejemplo:
+
+
+```{python}
+grid = sns.FacetGrid(data = penguins, col="species")
+grid.map(sns.histplot, "body_mass_g");
+```
+
+::: {.callout-important}
+Para que puedas visualizar el gráfico anterior en tu cuaderno de _Colab_ tienes que escribir las dos instrucciones anteriores en la misma celda. 
+:::
+
+Fíjate en las dos etapas que se han seguido en el ejemplo anterior para la construcción de los tres histogramas:
+
+1. La primera instrucción 
+
+   `grid = sns.FacetGrid(data = penguins, col="species")`{.python}
+
+   crea el mosaico con las tres columnas para las tres especies, y lo almacena en un nuevo objeto de nombre `grid` (puedes usar cualquier otro nombre). 
+
+   ::: {.callout-note}
+   Para inicializar un mosaico de gráficos con una columna para cada valor de una variable    categórica, inicializa la clase `FacetGrid` indicando:
+   
+   - La hoja de datos como valor del parámetro `data`
+   - El nombre de la variable categórica para crear los grupos como valor del parámetro `col`
+   :::
+
+   En este punto tenemos preparadas tres celdas para crear en cada celda un gráfico de los datos de la especie correspondiente a esa celda. La creación efectiva de los gráficos se realiza en el siguiente paso. 
+
+2. La segunda instrucción 
+
+   `grid.map(sns.histplot, "body_mass_g")`{.python}  
+
+   aplica el método `map()` al mosaico creado en el paso anterior, especificando qué tipo de gráfico queremos en cada celda del mosaico, y a qué variable queremos aplicar ese gráfico:
+
+   - El primer argumento `sns.histplot` indica que en cada celda queremos realizar un histograma (para el grupo de datos de la especie correspondiente a la celda).
+   - El segundo argumento `"body_mass_g"` indica la variable de la que queremos hacer los histogramas.
+
+   ::: {.callout-note}
+   Para crear sendos gráficos de los datos asociados a cada celda de un mosaico creado con `FacetGrid` usa el método `map()` con los siguientes argumentos:
+
+   - La función para construir los gráficos
+   - El nombre de la variable a la que aplicar esa función gráfica
+   :::
+
+
+
+:::: {#exr-facetgrid}
+Usa la clase `FacetGrid` para realizar sendos histogramas de la distribución del peso para hembras y machos.
+
+::: {.content-visible when-format="html"}
+
+Tienes que obtener la siguiente salida:
 
 ```{python}
 #| echo: false
-grid = sns.FacetGrid(penguins, col="species")
-grid.map(sns.histplot, "body_mass_g")
-# grid.map(sns.histplot, data=penguins, x="body_mass_g") # mal, sin agrupamiento por categorías
+#| fig-env: "center"
+grid = sns.FacetGrid(data = penguins, col="sex")
+grid.map(sns.histplot, "body_mass_g");
 ```
+:::
+
+::::
+
+
+***
+
+Si al inicializar la clase `FacetGrid` se usa el parámetro `row` en lugar de `col` los diferentes gráficos aparecerán dispuestos por filas en lugar de por columnas. Por ejemplo:
+
+
+```{python}
+grid = sns.FacetGrid(data = penguins, row="species")
+grid.map(sns.histplot, "body_mass_g");
+```
+
+
+De hecho, se pueden usar los argumentos `row` y `col` al mismo tiempo para crear un mosaico bidimensional. Las siguientes instrucciones crean un mosaico de histogramas del peso de los pingüinos, distinguiendo la especie por filas y el sexo por columnas, de dimensiones $3 \times 2$:
+
+
+```{python}
+grid = sns.FacetGrid(data = penguins, row="sex", col="species")
+grid.map(sns.histplot, "body_mass_g");
+```
+
+:::: {#exr-FacetGrid-3x2}
+Usa `FacetGrid` para crear un mosaico de histogramas para la longitud de las alas de los pingüinos distingüiendo la isla en la que viven y su sexo.
+
+::: {.content-visible when-format="html"}
+El resultado debe ser el siguiente:
+
+```{python}
+#| echo: false
+#| fig-env: "center"
+grid = sns.FacetGrid(data = penguins,  row="island", col="sex")
+grid.map(sns.histplot, "flipper_length_mm");
+```
+:::
+::::
 
 
 ## Diagramas de caja y bigotes
 
-En la __próxima sesión__ aprenderás a realizar el siguiente gráfico comparativo de los diagramas de caja y bigotes del peso de cada especie (es el gráfico de la portada).
+Para acabar la práctica realizaremos el gráfico de la portada de este documento
+![](../img/cover/cover.png)
+en el que se representa un diagrama de caja y bigotes para el peso de los pingüinos de cada especie. 
 
-Repasaremos el concepto de __outliers__ para explicar los dos outliers que aparecen en la distribución del peso de los pingüinos de la especie Chinstrap.
+En la @sec-1numerical-boxplot hicimos un diagrama de caja y bigotes para el peso de todos los pingüinos (sin distinguir la especie) con la instrucción
+
+```{.python}
+sns.boxplot(data=penguins, y="body_mass_g");
+```
+
+Para diferenciar por especie no tenemos más que añadir el argumento `x="species"`:
 
 ```{python}
-#| echo: false
 sns.boxplot(data=penguins, x="species", y="body_mass_g");
 ```
 
+
+Los dos puntos que aparecen resaltados con un rombo fuera de los bigotes en el diagrama de la especie Chinstrap (en naranja) son  __outliers__. El outlier por debajo del bigote inferior representa un pingüino de la especie Chinstrap con peso excesivamente bajo, y el outlier por encima del bigote superior se corresponde con un pingüino de la especie Chinstrap con peso excesivamente alto (excesivamente bajo/alto respecto a la distribución del peso en los pingüinos de la especie Chinstrap).
+
+
+::: {#exr-boxplots}
+Realiza un gráfico que muestre los diagramas de caja y bigotes para el peso de las hembras y de los machos.
+
+¿Aparecen outliers en alguno de los dos grupos?
+:::

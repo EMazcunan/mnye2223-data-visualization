@@ -93,7 +93,7 @@ Realiza un histograma para la longitud de las alas de los pingüinos.
 :::
 
 
-## Diagrama de caja y bigotes
+## Diagrama de caja y bigotes {#sec-1numerical-boxplot}
 
 <!-- - [ ] En `pandas` están `Dataframe.plot.box()` y `Dataframe.boxplot()` -->
 

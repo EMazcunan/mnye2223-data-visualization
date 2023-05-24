@@ -62,7 +62,7 @@ fig-align: center # no tiene efecto sin caption
 
 execute:
   warning: false
-  freeze: true
+  # freeze: true
 
 format:
   mnye-book-html: 

@@ -349,7 +349,7 @@ backToTopButton.addEventListener("click", function () {
 <p>El método <code>describe()</code> que usamos en la <a href="1numerical.html#sec-1numerical-describe"><span>Sección&nbsp;5.1</span></a> para obtener un resumen de la distribución del peso de todos los pingüinos, también puede aplicarse al peso agrupado por especies:</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>penguins.groupby(<span class="st">"species"</span>)[<span class="st">"body_mass_g"</span>].describe()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -541,22 +541,137 @@ sns.histplot(data=penguins, x="body_mass_g", hue="species",
 </section>
 <section id="mosaico-de-histogramas" class="level3" data-number="7.2.3">
 <h3 data-number="7.2.3" class="anchored" data-anchor-id="mosaico-de-histogramas"><span class="header-section-number">7.2.3</span> Mosaico de histogramas</h3>
-<p>En la <strong>próxima sesión</strong> aprenderás a realizar el siguiente mosaico de histogramas (con una sola línea de código):</p>
+<p>En los dos apartados anteriores aprendiste a crear dos tipos de histogramas para visualizar la distribución de una variable numérica distinguiendo varias categorías con colores diferentes en un mismo gráfico. Pero a veces puede resultar más útil realizar histogramas independientes para cada categoría. En este apartado aprenderás a crear, de forma simultánea, tres histogramas con la distribución del peso de los pingüinos de cada especie.</p>
+<p>Con este fin el paquete <code>seaborn</code> proporciona la clase <code>FacetGrid</code>, que permite crear un mosaico o una malla en la que ubicar los diferentes gráficos para los datos de cada categoría.</p>
+<p>Para entender cómo se usa la clase <code>FacetGrid</code> empieza ejecutando la siguiente instrucción:</p>
 <div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.FacetGrid(data<span class="op">=</span>penguins, col<span class="op">=</span><span class="st">"species"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="numerical_by_categorical_files/figure-html/cell-6-output-1.png" width="853" height="275"></p>
+<p><img src="numerical_by_categorical_files/figure-html/cell-6-output-1.png" width="850" height="276"></p>
+</div>
+</div>
+<p>Observa el resultado y aprecia que se han creado tres ejes de coordenadas, uno para cada especie. El efecto del argumento <code>col="species"</code> es que se ha creado una columna (<code>col</code>=<em>column</em>) para cada categoría de la variable <code>species</code>.</p>
+<p>De momento hemos inicializado el mosaico pero aún no hemos dibujado nada en cada una de las celdas del mosaico. Para hacerlo tenemos que aplicar al mosaico el método <code>map()</code>, como en el siguiente ejemplo:</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> sns.FacetGrid(data <span class="op">=</span> penguins, col<span class="op">=</span><span class="st">"species"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>grid.<span class="bu">map</span>(sns.histplot, <span class="st">"body_mass_g"</span>)<span class="op">;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="numerical_by_categorical_files/figure-html/cell-7-output-1.png" width="853" height="275"></p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Para que puedas visualizar el gráfico anterior en tu cuaderno de <em>Colab</em> tienes que escribir las dos instrucciones anteriores en la misma celda.</p>
+</div>
+</div>
+</div>
+<p>Fíjate en las dos etapas que se han seguido en el ejemplo anterior para la construcción de los tres histogramas:</p>
+<ol type="1">
+<li><p>La primera instrucción</p>
+<p><code class="sourceCode python">grid <span class="op">=</span> sns.FacetGrid(data <span class="op">=</span> penguins, col<span class="op">=</span><span class="st">"species"</span>)</code></p>
+<p>crea el mosaico con las tres columnas para las tres especies, y lo almacena en un nuevo objeto de nombre <code>grid</code> (puedes usar cualquier otro nombre).</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Para inicializar un mosaico de gráficos con una columna para cada valor de una variable categórica, inicializa la clase <code>FacetGrid</code> indicando:</p>
+<ul>
+<li>La hoja de datos como valor del parámetro <code>data</code></li>
+<li>El nombre de la variable categórica para crear los grupos como valor del parámetro <code>col</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p>En este punto tenemos preparadas tres celdas para crear en cada celda un gráfico de los datos de la especie correspondiente a esa celda. La creación efectiva de los gráficos se realiza en el siguiente paso.</p></li>
+<li><p>La segunda instrucción</p>
+<p><code class="sourceCode python">grid.<span class="bu">map</span>(sns.histplot, <span class="st">"body_mass_g"</span>)</code></p>
+<p>aplica el método <code>map()</code> al mosaico creado en el paso anterior, especificando qué tipo de gráfico queremos en cada celda del mosaico, y a qué variable queremos aplicar ese gráfico:</p>
+<ul>
+<li>El primer argumento <code>sns.histplot</code> indica que en cada celda queremos realizar un histograma (para el grupo de datos de la especie correspondiente a la celda).</li>
+<li>El segundo argumento <code>"body_mass_g"</code> indica la variable de la que queremos hacer los histogramas.</li>
+</ul>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Para crear sendos gráficos de los datos asociados a cada celda de un mosaico creado con <code>FacetGrid</code> usa el método <code>map()</code> con los siguientes argumentos:</p>
+<ul>
+<li>La función para construir los gráficos</li>
+<li>El nombre de la variable a la que aplicar esa función gráfica</li>
+</ul>
+</div>
+</div>
+</div></li>
+</ol>
+<div id="exr-facetgrid" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 7.4 </strong></span>Usa la clase <code>FacetGrid</code> para realizar sendos histogramas de la distribución del peso para hembras y machos.</p>
+<p>Tienes que obtener la siguiente salida:</p>
+<div class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="numerical_by_categorical_files/figure-html/cell-8-output-1.png" width="565" height="275" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p>Si al inicializar la clase <code>FacetGrid</code> se usa el parámetro <code>row</code> en lugar de <code>col</code> los diferentes gráficos aparecerán dispuestos por filas en lugar de por columnas. Por ejemplo:</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> sns.FacetGrid(data <span class="op">=</span> penguins, row<span class="op">=</span><span class="st">"species"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>grid.<span class="bu">map</span>(sns.histplot, <span class="st">"body_mass_g"</span>)<span class="op">;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="numerical_by_categorical_files/figure-html/cell-9-output-1.png" width="277" height="851"></p>
+</div>
+</div>
+<p>De hecho, se pueden usar los argumentos <code>row</code> y <code>col</code> al mismo tiempo para crear un mosaico bidimensional. Las siguientes instrucciones crean un mosaico de histogramas del peso de los pingüinos, distinguiendo la especie por filas y el sexo por columnas, de dimensiones <span class="math inline">\(3 \times 2\)</span>:</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> sns.FacetGrid(data <span class="op">=</span> penguins, row<span class="op">=</span><span class="st">"sex"</span>, col<span class="op">=</span><span class="st">"species"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>grid.<span class="bu">map</span>(sns.histplot, <span class="st">"body_mass_g"</span>)<span class="op">;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="numerical_by_categorical_files/figure-html/cell-10-output-1.png" width="853" height="563"></p>
+</div>
+</div>
+<div id="exr-FacetGrid-3x2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 7.5 </strong></span>Usa <code>FacetGrid</code> para crear un mosaico de histogramas para la longitud de las alas de los pingüinos distingüiendo la isla en la que viven y su sexo.</p>
+<p>El resultado debe ser el siguiente:</p>
+<div class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="numerical_by_categorical_files/figure-html/cell-11-output-1.png" width="565" height="851" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </section>
 </section>
 <section id="diagramas-de-caja-y-bigotes" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="diagramas-de-caja-y-bigotes"><span class="header-section-number">7.3</span> Diagramas de caja y bigotes</h2>
-<p>En la <strong>próxima sesión</strong> aprenderás a realizar el siguiente gráfico comparativo de los diagramas de caja y bigotes del peso de cada especie (es el gráfico de la portada).</p>
-<p>Repasaremos el concepto de <strong>outliers</strong> para explicar los dos outliers que aparecen en la distribución del peso de los pingüinos de la especie Chinstrap.</p>
-<div class="cell" data-execution_count="6">
+<p>Para acabar la práctica realizaremos el gráfico de la portada de este documento <img src="../img/cover/cover.png" class="img-fluid"> en el que se representa un diagrama de caja y bigotes para el peso de los pingüinos de cada especie.</p>
+<p>En la <a href="1numerical.html#sec-1numerical-boxplot"><span>Sección&nbsp;5.3</span></a> hicimos un diagrama de caja y bigotes para el peso de todos los pingüinos (sin distinguir la especie) con la instrucción</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>penguins, y<span class="op">=</span><span class="st">"body_mass_g"</span>)<span class="op">;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Para diferenciar por especie no tenemos más que añadir el argumento <code>x="species"</code>:</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">"species"</span>, y<span class="op">=</span><span class="st">"body_mass_g"</span>)<span class="op">;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="numerical_by_categorical_files/figure-html/cell-7-output-1.png" width="602" height="429"></p>
+<p><img src="numerical_by_categorical_files/figure-html/cell-12-output-1.png" width="602" height="429"></p>
 </div>
+</div>
+<p>Los dos puntos que aparecen resaltados con un rombo fuera de los bigotes en el diagrama de la especie Chinstrap (en naranja) son <strong>outliers</strong>. El outlier por debajo del bigote inferior representa un pingüino de la especie Chinstrap con peso excesivamente bajo, y el outlier por encima del bigote superior se corresponde con un pingüino de la especie Chinstrap con peso excesivamente alto (excesivamente bajo/alto respecto a la distribución del peso en los pingüinos de la especie Chinstrap).</p>
+<div id="exr-boxplots" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 7.6 </strong></span>Realiza un gráfico que muestre los diagramas de caja y bigotes para el peso de las hembras y de los machos.</p>
+<p>¿Aparecen outliers en alguno de los dos grupos?</p>
 </div>
 
 
